@@ -43,6 +43,10 @@ npm run dev     # http://localhost:5173 (trainer) and http://localhost:5173/solo
 
 Camera scanning and move tracking are experimental and only appear locally. `__CAMERA_FEATURES__` (see `app/src/features.ts`) is on in `npm run dev` and off in production builds, where those pages are left out of the bundle. Set `VITE_CAMERA_FEATURES=true` or `false` to override it.
 
+## Deploy (Vercel)
+
+`vercel.json` at the repository root installs and builds `app/` and serves `app/dist`, so importing the GitHub repository in Vercel with the default settings is enough: every push to `main` deploys to production and other branches get preview URLs. The solo timer is at `/solo.html`.
+
 ## Repository layout
 
 | Path | Contents |
