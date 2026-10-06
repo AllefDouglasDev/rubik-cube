@@ -45,7 +45,7 @@ Camera scanning and move tracking are experimental and only appear locally. `__C
 
 ## Deploy (Vercel)
 
-`vercel.json` at the repository root installs and builds `app/` and serves `app/dist`, so importing the GitHub repository in Vercel with the default settings is enough: every push to `main` deploys to production and other branches get preview URLs. The solo timer is at `/solo.html`.
+Import the repository in Vercel as a single project with **Root Directory `app`** (the Vite preset is detected; `app/vercel.json` pins the commands). Keep "Include files outside the root directory" enabled: the build reads the curriculum from `docs/curriculum`. Every push to `main` deploys to production and other branches get preview URLs. The solo timer is at `/solo.html`.
 
 ## Repository layout
 
