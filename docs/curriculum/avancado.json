@@ -1,0 +1,599 @@
+{
+  "nivel": "avancado",
+  "titulo": "Avançado — CFOP completo e além",
+  "meta": {
+    "mediaAlvoMs": 20000,
+    "movimentosTipicos": "50-60"
+  },
+  "aviso": "Todos os algoritmos deste nível são validados automaticamente (app/src/curriculum/curriculum.test.ts e analysis/llCases.test.ts).",
+  "fontes": [
+    "https://jperm.net/3x3/cfop",
+    "https://algdb.net",
+    "https://www.speedcubedb.com",
+    "https://www.speedsolving.com/wiki/index.php/Roux_method",
+    "https://www.speedsolving.com/wiki/index.php/ZZ_method"
+  ],
+  "itens": [
+    {
+      "id": "adv-01-pll-completo",
+      "titulo": "PLL completo",
+      "etapa": "pll",
+      "descricao": "Os 21 casos de PLL. É o primeiro set a aprender, porque tem menos casos e o ganho é maior. Cada algoritmo foi validado: preserva o F2L e a orientação, e os 21 geram casos distintos, cada um com a estrutura da sua família.",
+      "quantidadeCasos": 21,
+      "algoritmos": [
+        {
+          "nome": "Aa",
+          "alg": "x R' U R' D2 R U' R' D2 R2 x'"
+        },
+        {
+          "nome": "Ab",
+          "alg": "x R2 D2 R U R' D2 R U' R x'"
+        },
+        {
+          "nome": "E",
+          "alg": "x' L' U L D' L' U' L D L' U' L D' L' U L D x"
+        },
+        {
+          "nome": "F",
+          "alg": "R' U' F' R U R' U' R' F R2 U' R' U' R U R' U R"
+        },
+        {
+          "nome": "Ga",
+          "alg": "R2 U R' U R' U' R U' R2 U' D R' U R D'"
+        },
+        {
+          "nome": "Gb",
+          "alg": "R' U' R U D' R2 U R' U R U' R U' R2 D"
+        },
+        {
+          "nome": "Gc",
+          "alg": "R2 U' R U' R U R' U R2 U D' R U' R' D"
+        },
+        {
+          "nome": "Gd",
+          "alg": "R U R' U' D R2 U' R U' R' U R' U R2 D'"
+        },
+        {
+          "nome": "H",
+          "alg": "M2 U M2 U2 M2 U M2"
+        },
+        {
+          "nome": "Ja",
+          "alg": "x R2 F R F' R U2 r' U r U2 x'"
+        },
+        {
+          "nome": "Jb",
+          "alg": "R U R' F' R U R' U' R' F R2 U' R'"
+        },
+        {
+          "nome": "Na",
+          "alg": "R U R' U R U R' F' R U R' U' R' F R2 U' R' U2 R U' R'"
+        },
+        {
+          "nome": "Nb",
+          "alg": "R' U R U' R' F' U' F R U R' F R' F' R U' R"
+        },
+        {
+          "nome": "Ra",
+          "alg": "R U' R' U' R U R D R' U' R D' R' U2 R'"
+        },
+        {
+          "nome": "Rb",
+          "alg": "R2 F R U R U' R' F' R U2 R' U2 R"
+        },
+        {
+          "nome": "T",
+          "alg": "R U R' U' R' F R2 U' R' U' R U R' F'"
+        },
+        {
+          "nome": "Ua",
+          "alg": "M2 U M U2 M' U M2"
+        },
+        {
+          "nome": "Ub",
+          "alg": "M2 U' M U2 M' U' M2"
+        },
+        {
+          "nome": "V",
+          "alg": "R U' R U R' D R D' R U' D R2 U R2 D' R2"
+        },
+        {
+          "nome": "Y",
+          "alg": "F R U' R' U' R U R' F' R U R' U' R' F R F'"
+        },
+        {
+          "nome": "Z",
+          "alg": "M' U M2 U M2 U M' U2 M2"
+        }
+      ],
+      "meta": "Reconhecer em menos de 1 s e executar em menos de 2 s."
+    },
+    {
+      "id": "adv-02-oll-completo",
+      "titulo": "OLL completo",
+      "etapa": "oll",
+      "descricao": "Os 57 casos de OLL, na numeração padrão. Validação automática: cada algoritmo preserva o F2L e orienta a última camada, os 57 casos são distintos, cada número está no grupo de formato certo (ponto, linha, L, cruz) e os OLLs 21–27 batem com os casos de cantos do 2-look.",
+      "quantidadeCasos": 57,
+      "algoritmos": [
+        {
+          "nome": "OLL 1",
+          "alg": "R U2 R2 F R F' U2 R' F R F'"
+        },
+        {
+          "nome": "OLL 2",
+          "alg": "r U r' U2 r U2 R' U2 R U' r'"
+        },
+        {
+          "nome": "OLL 3",
+          "alg": "r' R2 U R' U r U2 r' U M'"
+        },
+        {
+          "nome": "OLL 4",
+          "alg": "M U' r U2 r' U' R U' R' M'"
+        },
+        {
+          "nome": "OLL 5",
+          "alg": "l' U2 L U L' U l"
+        },
+        {
+          "nome": "OLL 6",
+          "alg": "r U2 R' U' R U' r'"
+        },
+        {
+          "nome": "OLL 7",
+          "alg": "r U R' U R U2 r'"
+        },
+        {
+          "nome": "OLL 8",
+          "alg": "l' U' L U' L' U2 l"
+        },
+        {
+          "nome": "OLL 9",
+          "alg": "R U R' U' R' F R2 U R' U' F'"
+        },
+        {
+          "nome": "OLL 10",
+          "alg": "R U R' U R' F R F' R U2 R'"
+        },
+        {
+          "nome": "OLL 11",
+          "alg": "r U R' U R' F R F' R U2 r'"
+        },
+        {
+          "nome": "OLL 12",
+          "alg": "M' R' U' R U' R' U2 R U' R r'"
+        },
+        {
+          "nome": "OLL 13",
+          "alg": "F U R U' R2 F' R U R U' R'"
+        },
+        {
+          "nome": "OLL 14",
+          "alg": "R' F R U R' F' R F U' F'"
+        },
+        {
+          "nome": "OLL 15",
+          "alg": "l' U' l L' U' L U l' U l"
+        },
+        {
+          "nome": "OLL 16",
+          "alg": "r U r' R U R' U' r U' r'"
+        },
+        {
+          "nome": "OLL 17",
+          "alg": "F R' F' R2 r' U R U' R' U' M'"
+        },
+        {
+          "nome": "OLL 18",
+          "alg": "r U R' U R U2 r2 U' R U' R' U2 r"
+        },
+        {
+          "nome": "OLL 19",
+          "alg": "r' R U R U R' U' M' R' F R F'"
+        },
+        {
+          "nome": "OLL 20",
+          "alg": "r U R' U' M2 U R U' R' U' M'"
+        },
+        {
+          "nome": "OLL 21",
+          "alg": "R U2 R' U' R U R' U' R U' R'"
+        },
+        {
+          "nome": "OLL 22",
+          "alg": "R U2 R2 U' R2 U' R2 U2 R"
+        },
+        {
+          "nome": "OLL 23",
+          "alg": "R2 D' R U2 R' D R U2 R"
+        },
+        {
+          "nome": "OLL 24",
+          "alg": "r U R' U' r' F R F'"
+        },
+        {
+          "nome": "OLL 25",
+          "alg": "F' r U R' U' r' F R"
+        },
+        {
+          "nome": "OLL 26",
+          "alg": "R U2 R' U' R U' R'"
+        },
+        {
+          "nome": "OLL 27",
+          "alg": "R U R' U R U2 R'"
+        },
+        {
+          "nome": "OLL 28",
+          "alg": "r U R' U' r' R U R U' R'"
+        },
+        {
+          "nome": "OLL 29",
+          "alg": "R U R' U' R U' R' F' U' F R U R'"
+        },
+        {
+          "nome": "OLL 30",
+          "alg": "F R' F R2 U' R' U' R U R' F2"
+        },
+        {
+          "nome": "OLL 31",
+          "alg": "R' U' F U R U' R' F' R"
+        },
+        {
+          "nome": "OLL 32",
+          "alg": "L U F' U' L' U L F L'"
+        },
+        {
+          "nome": "OLL 33",
+          "alg": "R U R' U' R' F R F'"
+        },
+        {
+          "nome": "OLL 34",
+          "alg": "R U R2 U' R' F R U R U' F'"
+        },
+        {
+          "nome": "OLL 35",
+          "alg": "R U2 R2 F R F' R U2 R'"
+        },
+        {
+          "nome": "OLL 36",
+          "alg": "L' U' L U' L' U L U L F' L' F"
+        },
+        {
+          "nome": "OLL 37",
+          "alg": "F R' F' R U R U' R'"
+        },
+        {
+          "nome": "OLL 38",
+          "alg": "R U R' U R U' R' U' R' F R F'"
+        },
+        {
+          "nome": "OLL 39",
+          "alg": "L F' L' U' L U F U' L'"
+        },
+        {
+          "nome": "OLL 40",
+          "alg": "R' F R U R' U' F' U R"
+        },
+        {
+          "nome": "OLL 41",
+          "alg": "R U R' U R U2 R' F R U R' U' F'"
+        },
+        {
+          "nome": "OLL 42",
+          "alg": "R' U' R U' R' U2 R F R U R' U' F'"
+        },
+        {
+          "nome": "OLL 43",
+          "alg": "F' U' L' U L F"
+        },
+        {
+          "nome": "OLL 44",
+          "alg": "F U R U' R' F'"
+        },
+        {
+          "nome": "OLL 45",
+          "alg": "F R U R' U' F'"
+        },
+        {
+          "nome": "OLL 46",
+          "alg": "R' U' R' F R F' U R"
+        },
+        {
+          "nome": "OLL 47",
+          "alg": "R' U' R' F R F' R' F R F' U R"
+        },
+        {
+          "nome": "OLL 48",
+          "alg": "F R U R' U' R U R' U' F'"
+        },
+        {
+          "nome": "OLL 49",
+          "alg": "r U' r2 U r2 U r2 U' r"
+        },
+        {
+          "nome": "OLL 50",
+          "alg": "r' U r2 U' r2 U' r2 U r'"
+        },
+        {
+          "nome": "OLL 51",
+          "alg": "F U R U' R' U R U' R' F'"
+        },
+        {
+          "nome": "OLL 52",
+          "alg": "R U R' U R U' B U' B' R'"
+        },
+        {
+          "nome": "OLL 53",
+          "alg": "l' U2 L U L' U' L U L' U l"
+        },
+        {
+          "nome": "OLL 54",
+          "alg": "r U2 R' U' R U R' U' R U' r'"
+        },
+        {
+          "nome": "OLL 55",
+          "alg": "R' F R U R U' R2 F' R2 U' R' U R U R'"
+        },
+        {
+          "nome": "OLL 56",
+          "alg": "r' U' r U' R' U R U' R' U R r' U r"
+        },
+        {
+          "nome": "OLL 57",
+          "alg": "R U R' U' M' U R U' r'"
+        }
+      ],
+      "meta": "Reconhecer em menos de 1 s."
+    },
+    {
+      "id": "adv-03-f2l-casos",
+      "titulo": "F2L: os 41 casos",
+      "etapa": "f2l",
+      "descricao": "Os 41 casos de F2L para o slot da frente-direita, sem rotação. A numeração é deste app (não a do jperm). Validação automática: cada algoritmo resolve o par sem tocar na cruz nem nos outros slots, e os 41 casos são distintos, ou seja, cobrem todos. Os casos 38–40 foram encontrados por busca exaustiva em <R, U, F>.",
+      "quantidadeCasos": 41,
+      "algoritmos": [
+        {
+          "nome": "F2L 1",
+          "alg": "U R U' R'"
+        },
+        {
+          "nome": "F2L 2",
+          "alg": "U' F' U F"
+        },
+        {
+          "nome": "F2L 3",
+          "alg": "F' U' F"
+        },
+        {
+          "nome": "F2L 4",
+          "alg": "R U R'"
+        },
+        {
+          "nome": "F2L 5",
+          "alg": "U' R U R' U2 R U' R'"
+        },
+        {
+          "nome": "F2L 6",
+          "alg": "U F' U' F U2 F' U F"
+        },
+        {
+          "nome": "F2L 7",
+          "alg": "U' R U2 R' U2 R U' R'"
+        },
+        {
+          "nome": "F2L 8",
+          "alg": "U F' U2 F U2 F' U F"
+        },
+        {
+          "nome": "F2L 9",
+          "alg": "U' R U' R' U F' U' F"
+        },
+        {
+          "nome": "F2L 10",
+          "alg": "U' R U R' U R U R'"
+        },
+        {
+          "nome": "F2L 11",
+          "alg": "U' R U2 R' U F' U' F"
+        },
+        {
+          "nome": "F2L 12",
+          "alg": "R U' R' U R U' R' U2 R U' R'"
+        },
+        {
+          "nome": "F2L 13",
+          "alg": "U F' U F U' F' U' F"
+        },
+        {
+          "nome": "F2L 14",
+          "alg": "U' R U' R' U R U R'"
+        },
+        {
+          "nome": "F2L 15",
+          "alg": "R U' R' U2 F' U' F"
+        },
+        {
+          "nome": "F2L 16",
+          "alg": "R U2 R' U' R U R'"
+        },
+        {
+          "nome": "F2L 17",
+          "alg": "F' U2 F U F' U' F"
+        },
+        {
+          "nome": "F2L 18",
+          "alg": "U R U2 R' U R U' R'"
+        },
+        {
+          "nome": "F2L 19",
+          "alg": "U' F' U2 F U' F' U F"
+        },
+        {
+          "nome": "F2L 20",
+          "alg": "U2 R U R' U R U' R'"
+        },
+        {
+          "nome": "F2L 21",
+          "alg": "U2 F' U' F U' F' U F"
+        },
+        {
+          "nome": "F2L 22",
+          "alg": "U R U' R' U' R U' R' U R U' R'"
+        },
+        {
+          "nome": "F2L 23",
+          "alg": "F U R U' R' F' R U' R'"
+        },
+        {
+          "nome": "F2L 24",
+          "alg": "U' R' F R F' R U R'"
+        },
+        {
+          "nome": "F2L 25",
+          "alg": "U R U' R' F R' F' R"
+        },
+        {
+          "nome": "F2L 26",
+          "alg": "R U' R' U R U' R'"
+        },
+        {
+          "nome": "F2L 27",
+          "alg": "F' U F U' F' U F"
+        },
+        {
+          "nome": "F2L 28",
+          "alg": "R U R' U' R U R'"
+        },
+        {
+          "nome": "F2L 29",
+          "alg": "U' R' F R F' R U' R'"
+        },
+        {
+          "nome": "F2L 30",
+          "alg": "U R U' R' U R U' R' U R U' R'"
+        },
+        {
+          "nome": "F2L 31",
+          "alg": "U' R U' R' U2 R U' R'"
+        },
+        {
+          "nome": "F2L 32",
+          "alg": "U R U R' U2 R U R'"
+        },
+        {
+          "nome": "F2L 33",
+          "alg": "U' R U R' U F' U' F"
+        },
+        {
+          "nome": "F2L 34",
+          "alg": "U F' U' F U' R U R'"
+        },
+        {
+          "nome": "F2L 35",
+          "alg": "R2 U2 F R2 F' U2 R' U R'"
+        },
+        {
+          "nome": "F2L 36",
+          "alg": "R U' R' U' R U R' U2 R U' R'"
+        },
+        {
+          "nome": "F2L 37",
+          "alg": "R U' R' U R U2 R' U R U' R'"
+        },
+        {
+          "nome": "F2L 38",
+          "alg": "F' U F U2 R U R'"
+        },
+        {
+          "nome": "F2L 39",
+          "alg": "R U' R' F' U' F"
+        },
+        {
+          "nome": "F2L 40",
+          "alg": "R F U R U' R' F' U' R'"
+        },
+        {
+          "nome": "F2L 41",
+          "alg": "R U F R U R' U' F' R'"
+        }
+      ],
+      "meta": "Cerca de 7–8 movimentos por par e no máximo 2 rotações por solve."
+    },
+    {
+      "id": "adv-04-lookahead",
+      "titulo": "Lookahead",
+      "etapa": "f2l",
+      "descricao": "Procurar o próximo par enquanto resolve o atual. Girar devagar e sem pausas.",
+      "algoritmos": [],
+      "meta": "Nenhuma pausa acima de 0,5 s no F2L."
+    },
+    {
+      "id": "adv-05-xcross",
+      "titulo": "Cross+1 / X-cross",
+      "etapa": "cruz",
+      "descricao": "Planejar na inspeção a cruz junto com o primeiro par.",
+      "algoritmos": [],
+      "meta": "X-cross em 30% dos solves."
+    },
+    {
+      "id": "adv-06-finger-tricks",
+      "titulo": "Finger tricks e TPS",
+      "etapa": "execucao",
+      "descricao": "Flicks de U e U', M com o anelar e algoritmos sem regrip.",
+      "algoritmos": [],
+      "meta": "TPS acima de 6 na execução do LL."
+    },
+    {
+      "id": "adv-07-sub-20",
+      "titulo": "Marco: média abaixo de 20 s",
+      "etapa": "marco",
+      "descricao": "",
+      "algoritmos": [],
+      "meta": "ao12 < 20 s"
+    },
+    {
+      "id": "adv-08-coll",
+      "titulo": "COLL",
+      "etapa": "ll-avancado",
+      "descricao": "Resolver os cantos da última camada quando as arestas já estão orientadas.",
+      "quantidadeCasos": 42,
+      "algoritmos": [],
+      "meta": "Opcional."
+    },
+    {
+      "id": "adv-09-wv-vls",
+      "titulo": "WV / VLS",
+      "etapa": "ll-avancado",
+      "descricao": "Orientar a última camada durante a inserção do último par.",
+      "quantidadeCasos": 243,
+      "algoritmos": [],
+      "meta": "Opcional. São 27 casos de WV e 216 de VLS."
+    },
+    {
+      "id": "adv-10-zbll",
+      "titulo": "ZBLL",
+      "etapa": "ll-avancado",
+      "descricao": "Resolver a última camada em um look.",
+      "quantidadeCasos": 493,
+      "algoritmos": [],
+      "meta": "Opcional."
+    },
+    {
+      "id": "adv-11-roux",
+      "titulo": "Método Roux",
+      "etapa": "metodo-alternativo",
+      "descricao": "Blocos, CMLL e LSE. Usa muito a fatia M e fica em cerca de 45 movimentos.",
+      "algoritmos": [],
+      "meta": "Opcional."
+    },
+    {
+      "id": "adv-12-zz",
+      "titulo": "Método ZZ",
+      "etapa": "metodo-alternativo",
+      "descricao": "EOLine ou EOCross, seguido de F2L sem rotações.",
+      "algoritmos": [],
+      "meta": "Opcional."
+    }
+  ]
+}

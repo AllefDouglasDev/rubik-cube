@@ -1,0 +1,177 @@
+{
+  "spike": "S2",
+  "environment": {
+    "date": "2026-10-01T19:55:18.752Z",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
+    "hardwareConcurrency": 15,
+    "deviceMemory": 16,
+    "crossOriginIsolated": true,
+    "gpu": {
+      "vendor": "apple",
+      "architecture": "metal-3",
+      "description": ""
+    }
+  },
+  "calibration": {
+    "W": [
+      84.13824305348865,
+      3.5895899027091125,
+      -1.1104952352027158
+    ],
+    "Y": [
+      79.18870947511324,
+      -27.54679480297515,
+      43.31872668147895
+    ],
+    "R": [
+      47.93275613024948,
+      48.39257279021671,
+      14.541020941888144
+    ],
+    "O": [
+      60.83305107897232,
+      54.58756116008058,
+      37.94595776425049
+    ],
+    "B": [
+      46.70213519137607,
+      15.548910216934177,
+      -59.1885525340552
+    ],
+    "G": [
+      64.86172727049563,
+      -51.289360995968806,
+      21.295358297502585
+    ]
+  },
+  "results": [
+    {
+      "lighting": "luz-2",
+      "calibration": "luz-2",
+      "pattern": "solved",
+      "center": "W",
+      "durationS": 10,
+      "voting": {
+        "windowSize": 10,
+        "threshold": 0.8
+      },
+      "cameraSettings": {
+        "aspectRatio": 1.7777777777777777,
+        "frameRate": 30,
+        "height": 720,
+        "resizeMode": "none",
+        "width": 1280
+      },
+      "metrics": {
+        "de2000": {
+          "frames": 300,
+          "stickerAccuracy": 73.44,
+          "frameAccuracy": 39.67,
+          "votedAcceptedCorrect": 95,
+          "votedAcceptedWrong": 81,
+          "firstAcceptMs": 3636,
+          "meanConfidence": 0.357,
+          "confusions": {
+            "W→R": 296,
+            "W→O": 154,
+            "W→B": 267
+          }
+        },
+        "de76": {
+          "frames": 300,
+          "stickerAccuracy": 86.26,
+          "frameAccuracy": 43,
+          "votedAcceptedCorrect": 99,
+          "votedAcceptedWrong": 59,
+          "firstAcceptMs": 3560,
+          "meanConfidence": 0.49,
+          "confusions": {
+            "W→R": 292,
+            "W→O": 5,
+            "W→B": 74
+          }
+        }
+      }
+    },
+    {
+      "lighting": "luz-2",
+      "calibration": "luz-2",
+      "pattern": "solved",
+      "center": "W",
+      "durationS": 10,
+      "voting": {
+        "windowSize": 10,
+        "threshold": 0.8
+      },
+      "cameraSettings": {
+        "aspectRatio": 1.7777777777777777,
+        "frameRate": 30,
+        "height": 720,
+        "resizeMode": "none",
+        "width": 1280
+      },
+      "metrics": {
+        "de2000": {
+          "frames": 301,
+          "stickerAccuracy": 100,
+          "frameAccuracy": 100,
+          "votedAcceptedCorrect": 292,
+          "votedAcceptedWrong": 0,
+          "firstAcceptMs": 320,
+          "meanConfidence": 0.415,
+          "confusions": {}
+        },
+        "de76": {
+          "frames": 301,
+          "stickerAccuracy": 100,
+          "frameAccuracy": 100,
+          "votedAcceptedCorrect": 292,
+          "votedAcceptedWrong": 0,
+          "firstAcceptMs": 320,
+          "meanConfidence": 0.635,
+          "confusions": {}
+        }
+      }
+    },
+    {
+      "lighting": "luz-2",
+      "calibration": "luz-2",
+      "pattern": "checkerboard",
+      "center": "W",
+      "durationS": 10,
+      "voting": {
+        "windowSize": 10,
+        "threshold": 0.8
+      },
+      "cameraSettings": {
+        "aspectRatio": 1.7777777777777777,
+        "frameRate": 30,
+        "height": 720,
+        "resizeMode": "none",
+        "width": 1280
+      },
+      "metrics": {
+        "de2000": {
+          "frames": 300,
+          "stickerAccuracy": 100,
+          "frameAccuracy": 100,
+          "votedAcceptedCorrect": 291,
+          "votedAcceptedWrong": 0,
+          "firstAcceptMs": 329,
+          "meanConfidence": 0.495,
+          "confusions": {}
+        },
+        "de76": {
+          "frames": 300,
+          "stickerAccuracy": 100,
+          "frameAccuracy": 100,
+          "votedAcceptedCorrect": 291,
+          "votedAcceptedWrong": 0,
+          "firstAcceptMs": 329,
+          "meanConfidence": 0.619,
+          "confusions": {}
+        }
+      }
+    }
+  ]
+}

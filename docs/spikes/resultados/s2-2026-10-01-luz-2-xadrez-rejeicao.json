@@ -1,0 +1,455 @@
+{
+  "spike": "S2",
+  "environment": {
+    "date": "2026-10-01T20:03:47.571Z",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
+    "hardwareConcurrency": 15,
+    "deviceMemory": 16,
+    "crossOriginIsolated": true,
+    "gpu": {
+      "vendor": "apple",
+      "architecture": "metal-3",
+      "description": ""
+    }
+  },
+  "calibration": {
+    "W": [
+      84.13824305348865,
+      3.5895899027091125,
+      -1.1104952352027158
+    ],
+    "Y": [
+      79.18870947511324,
+      -27.54679480297515,
+      43.31872668147895
+    ],
+    "R": [
+      47.93275613024948,
+      48.39257279021671,
+      14.541020941888144
+    ],
+    "O": [
+      60.83305107897232,
+      54.58756116008058,
+      37.94595776425049
+    ],
+    "B": [
+      46.70213519137607,
+      15.548910216934177,
+      -59.1885525340552
+    ],
+    "G": [
+      64.86172727049563,
+      -51.289360995968806,
+      21.295358297502585
+    ]
+  },
+  "results": [
+    {
+      "lighting": "luz-2",
+      "lightingAsRecorded": "luz-1 (rótulo esquecido; medido na luz-2)",
+      "calibration": "luz-2",
+      "pattern": "checkerboard",
+      "center": "Y",
+      "durationS": 10,
+      "voting": {
+        "windowSize": 10,
+        "threshold": 0.8
+      },
+      "rejectLimits": {
+        "de2000": {
+          "maxDistance": 12,
+          "minConfidence": 0.1
+        },
+        "de76": {
+          "maxDistance": 20,
+          "minConfidence": 0.1
+        }
+      },
+      "cameraSettings": {
+        "aspectRatio": 1.7777777777777777,
+        "frameRate": 30,
+        "height": 720,
+        "resizeMode": "none",
+        "width": 1280
+      },
+      "metrics": {
+        "de2000": {
+          "frames": 301,
+          "stickerAccuracy": 78.37,
+          "frameAccuracy": 0,
+          "votedAcceptedCorrect": 0,
+          "votedAcceptedWrong": 0,
+          "meanConfidence": 0.541,
+          "unknownRate": 21.63,
+          "nearestAccuracy": 100,
+          "correctDistance": {
+            "mean": 8,
+            "p95": 12.8,
+            "max": 13.1
+          },
+          "confusions": {
+            "W→?": 586
+          }
+        },
+        "de76": {
+          "frames": 301,
+          "stickerAccuracy": 100,
+          "frameAccuracy": 100,
+          "votedAcceptedCorrect": 292,
+          "votedAcceptedWrong": 0,
+          "firstAcceptMs": 319,
+          "meanConfidence": 0.661,
+          "unknownRate": 0,
+          "nearestAccuracy": 100,
+          "correctDistance": {
+            "mean": 9.8,
+            "p95": 14.5,
+            "max": 14.5
+          },
+          "confusions": {}
+        }
+      }
+    },
+    {
+      "lighting": "luz-2",
+      "lightingAsRecorded": "luz-1 (rótulo esquecido; medido na luz-2)",
+      "calibration": "luz-2",
+      "pattern": "checkerboard",
+      "center": "W",
+      "durationS": 10,
+      "voting": {
+        "windowSize": 10,
+        "threshold": 0.8
+      },
+      "rejectLimits": {
+        "de2000": {
+          "maxDistance": 12,
+          "minConfidence": 0.1
+        },
+        "de76": {
+          "maxDistance": 20,
+          "minConfidence": 0.1
+        }
+      },
+      "cameraSettings": {
+        "aspectRatio": 1.7777777777777777,
+        "frameRate": 30,
+        "height": 720,
+        "resizeMode": "none",
+        "width": 1280
+      },
+      "metrics": {
+        "de2000": {
+          "frames": 301,
+          "stickerAccuracy": 99.63,
+          "frameAccuracy": 98.01,
+          "votedAcceptedCorrect": 290,
+          "votedAcceptedWrong": 0,
+          "firstAcceptMs": 390,
+          "meanConfidence": 0.539,
+          "unknownRate": 0.37,
+          "nearestAccuracy": 100,
+          "correctDistance": {
+            "mean": 7.9,
+            "p95": 11.5,
+            "max": 14.8
+          },
+          "confusions": {
+            "W→?": 10
+          }
+        },
+        "de76": {
+          "frames": 301,
+          "stickerAccuracy": 100,
+          "frameAccuracy": 100,
+          "votedAcceptedCorrect": 292,
+          "votedAcceptedWrong": 0,
+          "firstAcceptMs": 323,
+          "meanConfidence": 0.662,
+          "unknownRate": 0,
+          "nearestAccuracy": 100,
+          "correctDistance": {
+            "mean": 10,
+            "p95": 16.4,
+            "max": 18.5
+          },
+          "confusions": {}
+        }
+      }
+    },
+    {
+      "lighting": "luz-2",
+      "lightingAsRecorded": "luz-1 (rótulo esquecido; medido na luz-2)",
+      "calibration": "luz-2",
+      "pattern": "checkerboard",
+      "center": "R",
+      "durationS": 10,
+      "voting": {
+        "windowSize": 10,
+        "threshold": 0.8
+      },
+      "rejectLimits": {
+        "de2000": {
+          "maxDistance": 12,
+          "minConfidence": 0.1
+        },
+        "de76": {
+          "maxDistance": 20,
+          "minConfidence": 0.1
+        }
+      },
+      "cameraSettings": {
+        "aspectRatio": 1.7777777777777777,
+        "frameRate": 30,
+        "height": 720,
+        "resizeMode": "none",
+        "width": 1280
+      },
+      "metrics": {
+        "de2000": {
+          "frames": 301,
+          "stickerAccuracy": 78.11,
+          "frameAccuracy": 0,
+          "votedAcceptedCorrect": 0,
+          "votedAcceptedWrong": 0,
+          "meanConfidence": 0.497,
+          "unknownRate": 21.89,
+          "nearestAccuracy": 100,
+          "correctDistance": {
+            "mean": 6.6,
+            "p95": 12.7,
+            "max": 13.4
+          },
+          "confusions": {
+            "R→?": 593
+          }
+        },
+        "de76": {
+          "frames": 301,
+          "stickerAccuracy": 88.89,
+          "frameAccuracy": 0,
+          "votedAcceptedCorrect": 0,
+          "votedAcceptedWrong": 292,
+          "meanConfidence": 0.479,
+          "unknownRate": 0,
+          "nearestAccuracy": 88.89,
+          "correctDistance": {
+            "mean": 10.2,
+            "p95": 17.2,
+            "max": 18.1
+          },
+          "confusions": {
+            "R→O": 301
+          }
+        }
+      }
+    },
+    {
+      "lighting": "luz-2",
+      "lightingAsRecorded": "luz-1 (rótulo esquecido; medido na luz-2)",
+      "calibration": "luz-2",
+      "pattern": "checkerboard",
+      "center": "O",
+      "durationS": 10,
+      "voting": {
+        "windowSize": 10,
+        "threshold": 0.8
+      },
+      "rejectLimits": {
+        "de2000": {
+          "maxDistance": 12,
+          "minConfidence": 0.1
+        },
+        "de76": {
+          "maxDistance": 20,
+          "minConfidence": 0.1
+        }
+      },
+      "cameraSettings": {
+        "aspectRatio": 1.7777777777777777,
+        "frameRate": 30,
+        "height": 720,
+        "resizeMode": "none",
+        "width": 1280
+      },
+      "metrics": {
+        "de2000": {
+          "frames": 300,
+          "stickerAccuracy": 68.04,
+          "frameAccuracy": 0,
+          "votedAcceptedCorrect": 0,
+          "votedAcceptedWrong": 0,
+          "meanConfidence": 0.467,
+          "unknownRate": 31.96,
+          "nearestAccuracy": 88.89,
+          "correctDistance": {
+            "mean": 6.8,
+            "p95": 13.9,
+            "max": 14.6
+          },
+          "confusions": {
+            "R→?": 863
+          }
+        },
+        "de76": {
+          "frames": 300,
+          "stickerAccuracy": 88.56,
+          "frameAccuracy": 0,
+          "votedAcceptedCorrect": 0,
+          "votedAcceptedWrong": 272,
+          "meanConfidence": 0.477,
+          "unknownRate": 0.33,
+          "nearestAccuracy": 88.89,
+          "correctDistance": {
+            "mean": 12.1,
+            "p95": 19.5,
+            "max": 20.5
+          },
+          "confusions": {
+            "R→O": 300,
+            "R→?": 9
+          }
+        }
+      }
+    },
+    {
+      "lighting": "luz-2",
+      "lightingAsRecorded": "luz-1 (rótulo esquecido; medido na luz-2)",
+      "calibration": "luz-2",
+      "pattern": "checkerboard",
+      "center": "B",
+      "durationS": 10,
+      "voting": {
+        "windowSize": 10,
+        "threshold": 0.8
+      },
+      "rejectLimits": {
+        "de2000": {
+          "maxDistance": 12,
+          "minConfidence": 0.1
+        },
+        "de76": {
+          "maxDistance": 20,
+          "minConfidence": 0.1
+        }
+      },
+      "cameraSettings": {
+        "aspectRatio": 1.7777777777777777,
+        "frameRate": 30,
+        "height": 720,
+        "resizeMode": "none",
+        "width": 1280
+      },
+      "metrics": {
+        "de2000": {
+          "frames": 301,
+          "stickerAccuracy": 86.08,
+          "frameAccuracy": 0,
+          "votedAcceptedCorrect": 0,
+          "votedAcceptedWrong": 0,
+          "meanConfidence": 0.533,
+          "unknownRate": 13.92,
+          "nearestAccuracy": 100,
+          "correctDistance": {
+            "mean": 7.6,
+            "p95": 13.4,
+            "max": 16.9
+          },
+          "confusions": {
+            "B→?": 347,
+            "G→?": 30
+          }
+        },
+        "de76": {
+          "frames": 301,
+          "stickerAccuracy": 97.08,
+          "frameAccuracy": 86.05,
+          "votedAcceptedCorrect": 253,
+          "votedAcceptedWrong": 0,
+          "firstAcceptMs": 1629,
+          "meanConfidence": 0.568,
+          "unknownRate": 2.92,
+          "nearestAccuracy": 100,
+          "correctDistance": {
+            "mean": 13.2,
+            "p95": 19.4,
+            "max": 21.9
+          },
+          "confusions": {
+            "B→?": 67,
+            "G→?": 12
+          }
+        }
+      }
+    },
+    {
+      "lighting": "luz-2",
+      "lightingAsRecorded": "luz-1 (rótulo esquecido; medido na luz-2)",
+      "calibration": "luz-2",
+      "pattern": "checkerboard",
+      "center": "G",
+      "durationS": 10,
+      "voting": {
+        "windowSize": 10,
+        "threshold": 0.8
+      },
+      "rejectLimits": {
+        "de2000": {
+          "maxDistance": 12,
+          "minConfidence": 0.1
+        },
+        "de76": {
+          "maxDistance": 20,
+          "minConfidence": 0.1
+        }
+      },
+      "cameraSettings": {
+        "aspectRatio": 1.7777777777777777,
+        "frameRate": 30,
+        "height": 720,
+        "resizeMode": "none",
+        "width": 1280
+      },
+      "metrics": {
+        "de2000": {
+          "frames": 300,
+          "stickerAccuracy": 88.89,
+          "frameAccuracy": 0,
+          "votedAcceptedCorrect": 0,
+          "votedAcceptedWrong": 0,
+          "meanConfidence": 0.53,
+          "unknownRate": 11.11,
+          "nearestAccuracy": 100,
+          "correctDistance": {
+            "mean": 7.2,
+            "p95": 14.2,
+            "max": 15.9
+          },
+          "confusions": {
+            "B→?": 300
+          }
+        },
+        "de76": {
+          "frames": 300,
+          "stickerAccuracy": 96.78,
+          "frameAccuracy": 71,
+          "votedAcceptedCorrect": 197,
+          "votedAcceptedWrong": 0,
+          "firstAcceptMs": 333,
+          "meanConfidence": 0.557,
+          "unknownRate": 3.22,
+          "nearestAccuracy": 100,
+          "correctDistance": {
+            "mean": 12.9,
+            "p95": 19.1,
+            "max": 22.6
+          },
+          "confusions": {
+            "B→?": 87
+          }
+        }
+      }
+    }
+  ]
+}

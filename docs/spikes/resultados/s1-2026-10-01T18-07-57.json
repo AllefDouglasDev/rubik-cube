@@ -1,0 +1,722 @@
+{
+  "spike": "S1",
+  "environment": {
+    "date": "2026-10-01T18:07:57.501Z",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "hardwareConcurrency": 15,
+    "deviceMemory": 16,
+    "crossOriginIsolated": true,
+    "gpu": {
+      "vendor": "apple",
+      "architecture": "metal-3",
+      "description": ""
+    }
+  },
+  "camera": {
+    "label": "MacBook Pro Camera (0000:0001)",
+    "settings": {
+      "aspectRatio": 1.7777777777777777,
+      "deviceId": "f3c180980dc0fa4edbd890743d00dfca8c36817b752d79555560aa58e8075500",
+      "frameRate": 30,
+      "groupId": "12f2bb5a48061d170661e568492a76b7d06dc2c25b5fecf743f4deceec2e14a8",
+      "height": 1080,
+      "resizeMode": "none",
+      "width": 1920
+    },
+    "capabilities": {
+      "aspectRatio": {
+        "max": 1920,
+        "min": 0.0005208333333333333
+      },
+      "deviceId": "f3c180980dc0fa4edbd890743d00dfca8c36817b752d79555560aa58e8075500",
+      "facingMode": [],
+      "frameRate": {
+        "max": 30,
+        "min": 0
+      },
+      "groupId": "12f2bb5a48061d170661e568492a76b7d06dc2c25b5fecf743f4deceec2e14a8",
+      "height": {
+        "max": 1920,
+        "min": 1
+      },
+      "resizeMode": [
+        "none",
+        "crop-and-scale"
+      ],
+      "width": {
+        "max": 1920,
+        "min": 1
+      }
+    }
+  },
+  "runs": [
+    {
+      "durationS": 20,
+      "camera": {
+        "requested": {
+          "width": 1280,
+          "height": 720,
+          "frameRate": 60,
+          "deviceId": "f3c180980dc0fa4edbd890743d00dfca8c36817b752d79555560aa58e8075500"
+        },
+        "actual": {
+          "width": 1280,
+          "height": 720,
+          "frameRate": 30
+        },
+        "measuredFps": 30,
+        "framesPresented": 600,
+        "droppedFrames": 0
+      },
+      "processingWidth": 640,
+      "createImageBitmapMs": {
+        "n": 300,
+        "mean": 0.3,
+        "p50": 0.2,
+        "p95": 0.4
+      },
+      "stages": [
+        {
+          "stage": "opencv",
+          "status": "ready",
+          "initMs": 22.9,
+          "info": {
+            "version": "5.0.0"
+          },
+          "processedFps": 30,
+          "processed": 300,
+          "skippedBusy": 0,
+          "procMs": {
+            "n": 300,
+            "mean": 7.3,
+            "p50": 7.2,
+            "p95": 9.5
+          },
+          "latencyMs": {
+            "n": 300,
+            "mean": 9.7,
+            "p50": 8.9,
+            "p95": 15.6
+          },
+          "detail": {
+            "readMs": {
+              "n": 300,
+              "mean": 2.1,
+              "p50": 1.8,
+              "p95": 3.7
+            },
+            "contours": {
+              "n": 300,
+              "mean": 540.1,
+              "p50": 540,
+              "p95": 568
+            },
+            "quads": {
+              "n": 300,
+              "mean": 11.1,
+              "p50": 11,
+              "p95": 15
+            }
+          }
+        }
+      ]
+    },
+    {
+      "durationS": 20,
+      "camera": {
+        "requested": {
+          "width": 1280,
+          "height": 720,
+          "frameRate": 60,
+          "deviceId": "f3c180980dc0fa4edbd890743d00dfca8c36817b752d79555560aa58e8075500"
+        },
+        "actual": {
+          "width": 1280,
+          "height": 720,
+          "frameRate": 30
+        },
+        "measuredFps": 30.3,
+        "framesPresented": 601,
+        "droppedFrames": 0
+      },
+      "processingWidth": 640,
+      "createImageBitmapMs": {
+        "n": 300,
+        "mean": 0.3,
+        "p50": 0.3,
+        "p95": 0.5
+      },
+      "stages": [
+        {
+          "stage": "mediapipe",
+          "backend": "GPU",
+          "status": "ready",
+          "initMs": 112.1,
+          "info": {
+            "delegate": "GPU"
+          },
+          "processedFps": 31,
+          "processed": 300,
+          "skippedBusy": 10,
+          "procMs": {
+            "n": 300,
+            "mean": 12,
+            "p50": 11.9,
+            "p95": 16.6
+          },
+          "latencyMs": {
+            "n": 300,
+            "mean": 14.5,
+            "p50": 13.9,
+            "p95": 21.3
+          },
+          "detail": {
+            "hands": {
+              "n": 300,
+              "mean": 0.5,
+              "p50": 0,
+              "p95": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "durationS": 20,
+      "camera": {
+        "requested": {
+          "width": 1280,
+          "height": 720,
+          "frameRate": 60,
+          "deviceId": "f3c180980dc0fa4edbd890743d00dfca8c36817b752d79555560aa58e8075500"
+        },
+        "actual": {
+          "width": 1280,
+          "height": 720,
+          "frameRate": 30
+        },
+        "measuredFps": 30,
+        "framesPresented": 600,
+        "droppedFrames": 0
+      },
+      "processingWidth": 640,
+      "createImageBitmapMs": {
+        "n": 300,
+        "mean": 0.2,
+        "p50": 0.2,
+        "p95": 0.2
+      },
+      "stages": [
+        {
+          "stage": "ort",
+          "backend": "webgpu",
+          "status": "ready",
+          "initMs": 425.8,
+          "info": {
+            "backend": "webgpu",
+            "inputs": [
+              "images"
+            ],
+            "outputs": [
+              "output0"
+            ]
+          },
+          "processedFps": 30,
+          "processed": 300,
+          "skippedBusy": 0,
+          "procMs": {
+            "n": 300,
+            "mean": 13.1,
+            "p50": 13.1,
+            "p95": 15.1
+          },
+          "latencyMs": {
+            "n": 300,
+            "mean": 15.9,
+            "p50": 14.3,
+            "p95": 22.9
+          },
+          "detail": {
+            "prepMs": {
+              "n": 300,
+              "mean": 2.3,
+              "p50": 2.3,
+              "p95": 2.8
+            },
+            "inferMs": {
+              "n": 300,
+              "mean": 10.2,
+              "p50": 10,
+              "p95": 11.7
+            },
+            "candidates": {
+              "n": 300,
+              "mean": 34.7,
+              "p50": 34,
+              "p95": 38
+            }
+          }
+        }
+      ]
+    },
+    {
+      "durationS": 20,
+      "camera": {
+        "requested": {
+          "width": 1280,
+          "height": 720,
+          "frameRate": 60,
+          "deviceId": "f3c180980dc0fa4edbd890743d00dfca8c36817b752d79555560aa58e8075500"
+        },
+        "actual": {
+          "width": 1280,
+          "height": 720,
+          "frameRate": 30
+        },
+        "measuredFps": 30,
+        "framesPresented": 600,
+        "droppedFrames": 0
+      },
+      "processingWidth": 640,
+      "createImageBitmapMs": {
+        "n": 300,
+        "mean": 0.1,
+        "p50": 0.1,
+        "p95": 0.2
+      },
+      "stages": [
+        {
+          "stage": "opencv",
+          "status": "ready",
+          "initMs": 19,
+          "info": {
+            "version": "5.0.0"
+          },
+          "processedFps": 30,
+          "processed": 300,
+          "skippedBusy": 0,
+          "procMs": {
+            "n": 300,
+            "mean": 5.8,
+            "p50": 5.7,
+            "p95": 6.2
+          },
+          "latencyMs": {
+            "n": 300,
+            "mean": 9,
+            "p50": 6.6,
+            "p95": 13.6
+          },
+          "detail": {
+            "readMs": {
+              "n": 300,
+              "mean": 1.5,
+              "p50": 1.4,
+              "p95": 1.7
+            },
+            "contours": {
+              "n": 300,
+              "mean": 694.4,
+              "p50": 692,
+              "p95": 734
+            },
+            "quads": {
+              "n": 300,
+              "mean": 17.2,
+              "p50": 17,
+              "p95": 23
+            }
+          }
+        },
+        {
+          "stage": "mediapipe",
+          "backend": "GPU",
+          "status": "ready",
+          "initMs": 134.6,
+          "info": {
+            "delegate": "GPU"
+          },
+          "processedFps": 31,
+          "processed": 300,
+          "skippedBusy": 0,
+          "procMs": {
+            "n": 300,
+            "mean": 13,
+            "p50": 12.2,
+            "p95": 15.8
+          },
+          "latencyMs": {
+            "n": 300,
+            "mean": 16.2,
+            "p50": 16,
+            "p95": 23
+          },
+          "detail": {
+            "hands": {
+              "n": 300,
+              "mean": 0.8,
+              "p50": 1,
+              "p95": 2
+            }
+          }
+        },
+        {
+          "stage": "ort",
+          "backend": "webgpu",
+          "status": "ready",
+          "initMs": 253.3,
+          "info": {
+            "backend": "webgpu",
+            "inputs": [
+              "images"
+            ],
+            "outputs": [
+              "output0"
+            ]
+          },
+          "processedFps": 31,
+          "processed": 300,
+          "skippedBusy": 0,
+          "procMs": {
+            "n": 300,
+            "mean": 15.2,
+            "p50": 15.1,
+            "p95": 16.7
+          },
+          "latencyMs": {
+            "n": 300,
+            "mean": 18.4,
+            "p50": 17.3,
+            "p95": 23.9
+          },
+          "detail": {
+            "prepMs": {
+              "n": 300,
+              "mean": 2.6,
+              "p50": 2.6,
+              "p95": 2.8
+            },
+            "inferMs": {
+              "n": 300,
+              "mean": 12.1,
+              "p50": 12,
+              "p95": 13.6
+            },
+            "candidates": {
+              "n": 300,
+              "mean": 26.8,
+              "p50": 26,
+              "p95": 36
+            }
+          }
+        }
+      ]
+    },
+    {
+      "durationS": 20,
+      "camera": {
+        "requested": {
+          "width": 1280,
+          "height": 720,
+          "frameRate": 60,
+          "deviceId": "f3c180980dc0fa4edbd890743d00dfca8c36817b752d79555560aa58e8075500"
+        },
+        "actual": {
+          "width": 1280,
+          "height": 720,
+          "frameRate": 30
+        },
+        "measuredFps": 30,
+        "framesPresented": 600,
+        "droppedFrames": 0
+      },
+      "processingWidth": 640,
+      "createImageBitmapMs": {
+        "n": 300,
+        "mean": 0.1,
+        "p50": 0.1,
+        "p95": 0.2
+      },
+      "stages": [
+        {
+          "stage": "opencv",
+          "status": "ready",
+          "initMs": 21.7,
+          "info": {
+            "version": "5.0.0"
+          },
+          "processedFps": 30,
+          "processed": 300,
+          "skippedBusy": 0,
+          "procMs": {
+            "n": 300,
+            "mean": 4.9,
+            "p50": 4.8,
+            "p95": 5.6
+          },
+          "latencyMs": {
+            "n": 300,
+            "mean": 8.4,
+            "p50": 6.3,
+            "p95": 13.2
+          },
+          "detail": {
+            "readMs": {
+              "n": 300,
+              "mean": 1.3,
+              "p50": 1.2,
+              "p95": 1.9
+            },
+            "contours": {
+              "n": 300,
+              "mean": 713.3,
+              "p50": 713,
+              "p95": 746
+            },
+            "quads": {
+              "n": 300,
+              "mean": 15.6,
+              "p50": 15,
+              "p95": 23
+            }
+          }
+        },
+        {
+          "stage": "mediapipe",
+          "backend": "CPU",
+          "status": "ready",
+          "initMs": 129.4,
+          "info": {
+            "delegate": "CPU"
+          },
+          "processedFps": 18,
+          "processed": 300,
+          "skippedBusy": 278,
+          "procMs": {
+            "n": 300,
+            "mean": 40,
+            "p50": 36.2,
+            "p95": 51.7
+          },
+          "latencyMs": {
+            "n": 300,
+            "mean": 42.4,
+            "p50": 40.2,
+            "p95": 56.4
+          },
+          "detail": {
+            "hands": {
+              "n": 300,
+              "mean": 1.1,
+              "p50": 1,
+              "p95": 2
+            }
+          }
+        },
+        {
+          "stage": "ort",
+          "backend": "wasm",
+          "status": "ready",
+          "initMs": 204.8,
+          "info": {
+            "backend": "wasm",
+            "inputs": [
+              "images"
+            ],
+            "outputs": [
+              "output0"
+            ]
+          },
+          "processedFps": 15,
+          "processed": 300,
+          "skippedBusy": 300,
+          "procMs": {
+            "n": 300,
+            "mean": 49.7,
+            "p50": 49.9,
+            "p95": 52.9
+          },
+          "latencyMs": {
+            "n": 300,
+            "mean": 51.7,
+            "p50": 51.1,
+            "p95": 59.2
+          },
+          "detail": {
+            "prepMs": {
+              "n": 300,
+              "mean": 2.6,
+              "p50": 2.6,
+              "p95": 3
+            },
+            "inferMs": {
+              "n": 300,
+              "mean": 46.6,
+              "p50": 46.9,
+              "p95": 49.5
+            },
+            "candidates": {
+              "n": 300,
+              "mean": 27.7,
+              "p50": 27,
+              "p95": 36
+            }
+          }
+        }
+      ]
+    },
+    {
+      "durationS": 20,
+      "camera": {
+        "requested": {
+          "width": 1920,
+          "height": 1080,
+          "frameRate": 30,
+          "deviceId": "f3c180980dc0fa4edbd890743d00dfca8c36817b752d79555560aa58e8075500"
+        },
+        "actual": {
+          "width": 1920,
+          "height": 1080,
+          "frameRate": 30
+        },
+        "measuredFps": 30,
+        "framesPresented": 600,
+        "droppedFrames": 0
+      },
+      "processingWidth": 960,
+      "createImageBitmapMs": {
+        "n": 300,
+        "mean": 0.1,
+        "p50": 0.1,
+        "p95": 0.2
+      },
+      "stages": [
+        {
+          "stage": "opencv",
+          "status": "ready",
+          "initMs": 19.5,
+          "info": {
+            "version": "5.0.0"
+          },
+          "processedFps": 30,
+          "processed": 300,
+          "skippedBusy": 0,
+          "procMs": {
+            "n": 300,
+            "mean": 10,
+            "p50": 10,
+            "p95": 10.5
+          },
+          "latencyMs": {
+            "n": 300,
+            "mean": 12,
+            "p50": 10.7,
+            "p95": 17.7
+          },
+          "detail": {
+            "readMs": {
+              "n": 300,
+              "mean": 2.2,
+              "p50": 2.1,
+              "p95": 2.4
+            },
+            "contours": {
+              "n": 300,
+              "mean": 1200.3,
+              "p50": 1198,
+              "p95": 1248
+            },
+            "quads": {
+              "n": 300,
+              "mean": 16.9,
+              "p50": 17,
+              "p95": 24
+            }
+          }
+        },
+        {
+          "stage": "mediapipe",
+          "backend": "GPU",
+          "status": "ready",
+          "initMs": 123.3,
+          "info": {
+            "delegate": "GPU"
+          },
+          "processedFps": 30,
+          "processed": 300,
+          "skippedBusy": 0,
+          "procMs": {
+            "n": 300,
+            "mean": 12.9,
+            "p50": 12.3,
+            "p95": 15.7
+          },
+          "latencyMs": {
+            "n": 300,
+            "mean": 14.9,
+            "p50": 14,
+            "p95": 20.1
+          },
+          "detail": {
+            "hands": {
+              "n": 300,
+              "mean": 1.7,
+              "p50": 2,
+              "p95": 2
+            }
+          }
+        },
+        {
+          "stage": "ort",
+          "backend": "webgpu",
+          "status": "ready",
+          "initMs": 199.4,
+          "info": {
+            "backend": "webgpu",
+            "inputs": [
+              "images"
+            ],
+            "outputs": [
+              "output0"
+            ]
+          },
+          "processedFps": 30,
+          "processed": 300,
+          "skippedBusy": 0,
+          "procMs": {
+            "n": 300,
+            "mean": 15.3,
+            "p50": 15.2,
+            "p95": 16.5
+          },
+          "latencyMs": {
+            "n": 300,
+            "mean": 17.4,
+            "p50": 16.5,
+            "p95": 22.8
+          },
+          "detail": {
+            "prepMs": {
+              "n": 300,
+              "mean": 3.3,
+              "p50": 3.3,
+              "p95": 3.6
+            },
+            "inferMs": {
+              "n": 300,
+              "mean": 11.5,
+              "p50": 11.3,
+              "p95": 12.7
+            },
+            "candidates": {
+              "n": 300,
+              "mean": 30.2,
+              "p50": 30,
+              "p95": 38
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

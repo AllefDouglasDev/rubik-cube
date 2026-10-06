@@ -1,0 +1,98 @@
+{
+  "nivel": "intermediario",
+  "titulo": "Intermediário — CFOP com 4LLL",
+  "meta": { "mediaAlvoMs": 30000, "movimentosTipicos": "60-80" },
+  "aviso": "Cada algoritmo foi validado automaticamente: aplicado ao inverso do caso num cubo virtual, ele preserva o F2L e produz exatamente o padrão esperado (app/src/curriculum/curriculum.test.ts).",
+  "fontes": [
+    "https://jperm.net/3x3/cfop",
+    "https://www.jperm.net/3x3/cfop/ll",
+    "https://www.cubeskills.com/uploads/pdf/tutorials/4-look-last-layer.pdf",
+    "https://www.speedsolving.com/wiki/index.php/2-Look_PLL"
+  ],
+  "itens": [
+    {
+      "id": "int-01-cruz-embaixo",
+      "titulo": "Cruz embaixo",
+      "etapa": "cruz",
+      "descricao": "Planejar a cruz inteira durante a inspeção e montá-la na face de baixo, sem rotação.",
+      "algoritmos": [],
+      "meta": "Cruz em até 8 movimentos e menos de 5 s."
+    },
+    {
+      "id": "int-02-f2l-intuitivo",
+      "titulo": "F2L intuitivo",
+      "etapa": "f2l",
+      "descricao": "Emparelhar o canto e a aresta na camada de cima e inserir o par no slot. Substitui os passos 3 e 4 do método de iniciante.",
+      "algoritmos": [],
+      "meta": "Até 12 movimentos por par, sem desfazer pares prontos."
+    },
+    {
+      "id": "int-03-oll-arestas",
+      "titulo": "OLL 2-look: arestas",
+      "etapa": "oll",
+      "descricao": "Orientar as arestas amarelas.",
+      "algoritmos": [
+        { "nome": "Linha", "alg": "F R U R' U' F'" },
+        { "nome": "L", "alg": "f R U R' U' f'" },
+        { "nome": "Ponto", "alg": "F R U R' U' F' f R U R' U' f'" }
+      ],
+      "meta": "Reconhecer e executar em menos de 3 s."
+    },
+    {
+      "id": "int-04-oll-cantos",
+      "titulo": "OLL 2-look: cantos",
+      "etapa": "oll",
+      "descricao": "Orientar os cantos amarelos.",
+      "algoritmos": [
+        { "nome": "Sune", "alg": "R U R' U R U2 R'" },
+        { "nome": "Antisune", "alg": "R U2 R' U' R U' R'" },
+        { "nome": "H", "alg": "R U R' U R U' R' U R U2 R'" },
+        { "nome": "Pi", "alg": "R U2 R2 U' R2 U' R2 U2 R" },
+        { "nome": "Headlights", "alg": "R2 D' R U2 R' D R U2 R" },
+        { "nome": "T", "alg": "r U R' U' r' F R F'" },
+        { "nome": "Bowtie", "alg": "F' r U R' U' r' F R" }
+      ],
+      "meta": "Reconhecer e executar os 7 casos em menos de 3 s cada."
+    },
+    {
+      "id": "int-05-pll-cantos",
+      "titulo": "PLL 2-look: cantos",
+      "etapa": "pll",
+      "descricao": "Permutar os cantos da última camada.",
+      "algoritmos": [
+        { "nome": "Headlights (T-perm)", "alg": "R U R' U' R' F R2 U' R' U' R U R' F'" },
+        { "nome": "Diagonal (Y-perm)", "alg": "F R U' R' U' R U R' F' R U R' U' R' F R F'" }
+      ],
+      "meta": "Executar em menos de 3 s."
+    },
+    {
+      "id": "int-06-pll-arestas",
+      "titulo": "PLL 2-look: arestas",
+      "etapa": "pll",
+      "descricao": "Permutar as arestas da última camada.",
+      "algoritmos": [
+        { "nome": "Ua", "alg": "M2 U M U2 M' U M2" },
+        { "nome": "Ub", "alg": "M2 U' M U2 M' U' M2" },
+        { "nome": "H", "alg": "M2 U M2 U2 M2 U M2" },
+        { "nome": "Z", "alg": "M' U M2 U M2 U M' U2 M2" }
+      ],
+      "meta": "Reconhecer e executar em menos de 2,5 s."
+    },
+    {
+      "id": "int-07-sub-40",
+      "titulo": "Marco: média abaixo de 40 s",
+      "etapa": "marco",
+      "descricao": "Consolidar o CFOP com 4LLL.",
+      "algoritmos": [],
+      "meta": "ao12 < 40 s"
+    },
+    {
+      "id": "int-08-sub-30",
+      "titulo": "Marco: média abaixo de 30 s",
+      "etapa": "marco",
+      "descricao": "É o ponto recomendado para começar o OLL e o PLL completos.",
+      "algoritmos": [],
+      "meta": "ao12 < 30 s"
+    }
+  ]
+}

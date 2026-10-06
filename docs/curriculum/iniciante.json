@@ -1,0 +1,83 @@
+{
+  "nivel": "iniciante",
+  "titulo": "Iniciante — Camada por camada",
+  "meta": { "mediaAlvoMs": 120000, "movimentosTipicos": "100-150" },
+  "fontes": ["https://ruwix.com/the-rubiks-cube/how-to-solve-the-rubiks-cube-beginners-method/", "https://jperm.net/3x3/moves"],
+  "itens": [
+    {
+      "id": "ini-01-notacao",
+      "titulo": "Notação",
+      "etapa": "fundamentos",
+      "descricao": "Ler e executar U D R L F B, com as variações ' e 2.",
+      "algoritmos": [],
+      "meta": "Executar 10 sequências ditadas sem erro."
+    },
+    {
+      "id": "ini-02-cruz-branca",
+      "titulo": "Cruz branca",
+      "etapa": "primeira-camada",
+      "descricao": "Montar a cruz branca com cada aresta alinhada ao centro lateral da sua cor. É uma etapa intuitiva.",
+      "algoritmos": [],
+      "meta": "Cruz correta em menos de 20 s."
+    },
+    {
+      "id": "ini-03-cantos-brancos",
+      "titulo": "Cantos brancos",
+      "etapa": "primeira-camada",
+      "descricao": "Colocar o canto embaixo da sua posição e repetir o gatilho até ele resolver.",
+      "algoritmos": [{ "nome": "Gatilho sexy move", "alg": "R U R' U'" }],
+      "meta": "Primeira camada completa sem consultar."
+    },
+    {
+      "id": "ini-04-meio",
+      "titulo": "Arestas da camada do meio",
+      "etapa": "segunda-camada",
+      "descricao": "Inserir as arestas sem amarelo na camada do meio.",
+      "algoritmos": [
+        { "nome": "Inserir à direita", "alg": "U R U' R' U' F' U F" },
+        { "nome": "Inserir à esquerda", "alg": "U' L' U L U F U' F'" }
+      ],
+      "meta": "Duas camadas completas sem consultar."
+    },
+    {
+      "id": "ini-05-cruz-amarela",
+      "titulo": "Cruz amarela",
+      "etapa": "ultima-camada",
+      "descricao": "Aplicar de 1 a 3 vezes, conforme o padrão: ponto, L, linha, cruz.",
+      "algoritmos": [{ "nome": "Cruz amarela", "alg": "F R U R' U' F'" }],
+      "meta": "Reconhecer o padrão e saber quantas aplicações faltam."
+    },
+    {
+      "id": "ini-06-arestas-amarelas",
+      "titulo": "Arestas amarelas",
+      "etapa": "ultima-camada",
+      "descricao": "Trocar as arestas da frente e da esquerda até alinhar todas com os centros.",
+      "algoritmos": [{ "nome": "Troca de arestas", "alg": "R U R' U R U2 R' U" }],
+      "meta": "Arestas alinhadas sem consultar."
+    },
+    {
+      "id": "ini-07-posicionar-cantos",
+      "titulo": "Posicionar cantos",
+      "etapa": "ultima-camada",
+      "descricao": "Ciclar três cantos até todos ficarem na posição certa, mesmo que ainda girados.",
+      "algoritmos": [{ "nome": "Ciclo de cantos", "alg": "U R U' L' U R' U' L" }],
+      "meta": "Cantos posicionados sem consultar."
+    },
+    {
+      "id": "ini-08-orientar-cantos",
+      "titulo": "Orientar cantos",
+      "etapa": "ultima-camada",
+      "descricao": "Aplicar 2 ou 4 vezes em cada canto e girar só o U entre um canto e outro. É normal o cubo parecer bagunçado no meio.",
+      "algoritmos": [{ "nome": "Orientação", "alg": "R' D' R D" }],
+      "meta": "Resolver o cubo inteiro sem consultar."
+    },
+    {
+      "id": "ini-09-sub-2min",
+      "titulo": "Marco: média abaixo de 2:00",
+      "etapa": "marco",
+      "descricao": "Consolidar o método com uma ao12 abaixo de 2 minutos.",
+      "algoritmos": [],
+      "meta": "ao12 < 120 s"
+    }
+  ]
+}
