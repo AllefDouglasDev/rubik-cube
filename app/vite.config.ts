@@ -30,7 +30,25 @@ export default defineConfig({
   optimizeDeps: { exclude: ["cubing", "@mediapipe/tasks-vision"] },
   // The curriculum content is read from ../docs/curriculum.
   server: { fs: { allow: [".."] } },
-  // Two pages: the trainer (index.html) and the solo timer (solo.html).
-  build: { target: "esnext", rollupOptions: { input: { main: "index.html", solo: "solo.html" } } },
+  build: {
+    target: "esnext",
+    // Two pages: the trainer (index.html) and the solo timer (solo.html).
+    rollupOptions: {
+      input: { main: "index.html", solo: "solo.html" },
+      // cubing.js loads its search worker entry through dynamic imports. Vite's preload helper touches
+      // `document` and crashes inside the worker (no scrambles in production) whenever an import has
+      // preload deps: JS deps are off (modulePreload below), and keeping dependencies out of the app chunks
+      // keeps CSS deps away from cubing's imports.
+      output: {
+        manualChunks(id: string) {
+          const cubing = /node_modules\/cubing\/dist\/lib\/cubing\/(.+)\.js$/.exec(id)?.[1];
+          if (cubing) return `cubing-${cubing.replace(/\//g, "-")}`;
+          const pkg = /node_modules\/((?:@[^/]+\/)?[^/]+)\//.exec(id)?.[1];
+          return pkg ? `vendor-${pkg.replace("/", "-")}` : undefined;
+        },
+      },
+    },
+    modulePreload: false,
+  },
   test: { environment: "node" },
 });
