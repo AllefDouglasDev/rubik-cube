@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>S2 · Classificação de cor</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="/src/shared/style.css" />
+  </head>
+  <body>
+    <h1>S2 · Classificação de cor dos adesivos</h1>
+    <main>
+      <div>
+        <div class="stage">
+          <video id="video" class="mirror"></video>
+          <canvas id="overlay" class="overlay"></canvas>
+        </div>
+        <p class="muted">
+          Encaixe uma face do cubo no quadrado guia, parada e de frente. A imagem está espelhada como num espelho, e a
+          grade lida segue o que você vê.
+        </p>
+        <section>
+          <h2>Resultados das medições</h2>
+          <table id="results"></table>
+          <div class="row" style="margin-top: 8px">
+            <button id="download" disabled>Baixar relatório</button>
+          </div>
+        </section>
+      </div>
+      <div>
+        <section>
+          <h2>Câmera</h2>
+          <label>Resolução
+            <select id="resolution">
+              <option value="1280x720" selected>1280×720</option>
+              <option value="1920x1080">1920×1080</option>
+              <option value="640x480">640×480</option>
+            </select>
+          </label>
+          <div class="row">
+            <button id="startCamera" class="primary">Abrir câmera</button>
+            <button id="lock" disabled>Travar exposição/WB</button>
+          </div>
+          <label>Tamanho do guia <input type="range" id="guide" min="30" max="85" value="55" /></label>
+          <label>Área amostrada por adesivo <input type="range" id="sample" min="15" max="70" value="40" /></label>
+          <pre id="cameraInfo" class="muted"></pre>
+        </section>
+        <section>
+          <h2>1 · Calibração</h2>
+          <p class="muted">Com o cubo resolvido, mostre cada face e clique na cor correspondente.</p>
+          <label>Nome <input type="text" id="calName" value="luz-1" /></label>
+          <div class="row" id="calButtons"></div>
+          <div class="row" style="margin-top: 8px">
+            <button id="calSave">Salvar</button>
+            <select id="calList"></select>
+            <button id="calLoad">Carregar</button>
+          </div>
+        </section>
+        <section>
+          <h2>2 · Leitura ao vivo</h2>
+          <label>Métrica
+            <select id="metric">
+              <option value="de76">ΔE76</option>
+              <option value="de76L">ΔE76 com L pela metade</option>
+              <option value="de2000">CIEDE2000</option>
+            </select>
+          </label>
+          <label><input type="checkbox" id="perCell" checked /> Calibração por posição (9 referências por cor)</label>
+          <label><input type="checkbox" id="reject" checked /> Rejeitar adesivo desconhecido (?)</label>
+          <label>Distância máx. ΔE76 <input type="number" id="maxDe76" value="25" min="1" max="100" /></label>
+          <label>Distância máx. CIEDE2000 <input type="number" id="maxDe2000" value="16" min="1" max="100" /></label>
+          <label>Confiança mín. <input type="number" id="minConf" value="0.1" min="0" max="0.9" step="0.05" /></label>
+          <label>Janela de votação (frames) <input type="number" id="window" value="10" min="1" max="60" /></label>
+          <label>Concordância mínima <input type="number" id="threshold" value="0.8" min="0.5" max="1" step="0.05" /></label>
+          <div id="live" class="muted">Calibre as 6 cores para ver a leitura.</div>
+        </section>
+        <section>
+          <h2>3 · Medição</h2>
+          <label>Iluminação <input type="text" id="lighting" value="luz-1" /></label>
+          <label>Padrão
+            <select id="pattern">
+              <option value="solved">Resolvido</option>
+              <option value="checkerboard">Xadrez (M2 E2 S2)</option>
+            </select>
+          </label>
+          <label>Cor do centro <select id="center"></select></label>
+          <label>Duração (s) <input type="number" id="duration" value="10" min="3" max="60" /></label>
+          <button id="measure" class="primary" disabled>Medir</button>
+          <pre id="measureLog" class="muted"></pre>
+        </section>
+      </div>
+    </main>
+    <script type="module" src="/src/s2/main.ts"></script>
+  </body>
+</html>

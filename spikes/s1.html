@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>S1 · Benchmark de visão</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="/src/shared/style.css" />
+  </head>
+  <body>
+    <h1>S1 · Benchmark de captura e inferência</h1>
+    <main>
+      <div>
+        <div class="stage"><video id="video" class="mirror"></video></div>
+        <section style="margin-top: 12px">
+          <h2>Métricas ao vivo</h2>
+          <table id="metrics"></table>
+        </section>
+      </div>
+      <div>
+        <section>
+          <h2>Câmera</h2>
+          <label>Dispositivo <select id="device"></select></label>
+          <label>Resolução
+            <select id="resolution">
+              <option value="640x480">640×480</option>
+              <option value="1280x720" selected>1280×720</option>
+              <option value="1920x1080">1920×1080</option>
+            </select>
+          </label>
+          <label>FPS pedido
+            <select id="fps">
+              <option value="30">30</option>
+              <option value="60" selected>60</option>
+            </select>
+          </label>
+          <div class="row">
+            <button id="startCamera" class="primary">Abrir câmera</button>
+            <button id="lock" disabled>Travar exposição/WB</button>
+          </div>
+          <pre id="cameraInfo" class="muted"></pre>
+        </section>
+        <section>
+          <h2>Pipeline (workers)</h2>
+          <label>Largura do frame processado
+            <select id="procWidth">
+              <option value="0">Nativa</option>
+              <option value="960">960</option>
+              <option value="640" selected>640</option>
+              <option value="320">320</option>
+            </select>
+          </label>
+          <label><input type="checkbox" id="use-opencv" checked /> OpenCV.js (contornos)</label>
+          <label><input type="checkbox" id="use-mediapipe" checked /> MediaPipe Hands
+            <select id="backend-mediapipe"><option>GPU</option><option>CPU</option></select>
+          </label>
+          <label><input type="checkbox" id="use-ort" checked /> ORT YOLO11n
+            <select id="backend-ort"><option>webgpu</option><option>wasm</option></select>
+          </label>
+          <div class="row">
+            <button id="startPipeline" disabled>Iniciar pipeline</button>
+            <button id="stopPipeline" disabled>Parar</button>
+          </div>
+        </section>
+        <section>
+          <h2>Benchmark</h2>
+          <label>Duração (s) <input type="number" id="duration" value="20" min="5" max="120" /></label>
+          <div class="row">
+            <button id="runBench" class="primary" disabled>Rodar benchmark</button>
+            <button id="download" disabled>Baixar relatório</button>
+          </div>
+          <pre id="benchLog" class="muted"></pre>
+        </section>
+      </div>
+    </main>
+    <script type="module" src="/src/s1/main.ts"></script>
+  </body>
+</html>
