@@ -1,0 +1,478 @@
+/* Solo timer. Uses the color tokens of ../styles.css. */
+
+.solo-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.solo-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--panel);
+}
+
+.nav-tab {
+  font: inherit;
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 14px;
+}
+
+.nav-tab.selected {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.solo {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: clamp(250px, 28vw, 340px) minmax(0, 1fr);
+}
+
+.solo-side {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border-right: 1px solid var(--border);
+  background: var(--panel);
+  min-height: 0;
+}
+
+.solo-main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: auto;
+}
+
+/* Holding, ready or running: only the clock stays on screen. */
+.solo-nav,
+.solo-side,
+.solo-scramble,
+.solo-averages {
+  transition: opacity 0.15s;
+}
+
+.solo-shell.focus .solo-nav,
+.solo-shell.focus .solo-side,
+.solo-shell.focus .solo-scramble,
+.solo-shell.focus .solo-averages {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.solo-shell.focus {
+  cursor: none;
+}
+
+/* The clock takes the whole window, centered and much larger. */
+.solo-shell.focus .solo-timer {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  background: var(--surface);
+}
+
+.solo-shell.focus .solo-timer .time {
+  font-size: min(30vw, 55vh);
+  line-height: 1;
+}
+
+.solo-shell.focus .solo-timer .hint {
+  font-size: 18px;
+}
+
+/* Sessions */
+
+.session-picker {
+  position: relative;
+}
+
+.session-picker > .row {
+  flex-wrap: nowrap;
+}
+
+.session-current {
+  flex: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+  text-align: left;
+}
+
+.session-number {
+  font-size: 20px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.session-date {
+  margin-left: auto;
+  color: var(--text-muted);
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.caret {
+  color: var(--text-muted);
+}
+
+.session-list {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  max-height: 60vh;
+  overflow: auto;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.15);
+}
+
+.session-list button {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  width: 100%;
+  border-color: transparent;
+  text-align: left;
+}
+
+.session-list button.active {
+  background: var(--grid);
+}
+
+/* Summary and solves */
+
+.solo-summary table,
+.solve-list {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.solo-summary th,
+.solo-summary td {
+  padding: 3px 6px;
+  text-align: right;
+}
+
+.solo-summary thead th {
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.solo-summary tbody th {
+  text-align: left;
+  font-weight: 600;
+}
+
+.solo-summary td {
+  color: var(--accent);
+}
+
+.solo-summary p {
+  margin: 8px 6px 0;
+  color: var(--text-secondary);
+}
+
+.solo-solves {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+.solve-list th {
+  position: sticky;
+  top: 0;
+  background: var(--panel);
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px;
+  text-align: right;
+}
+
+.solve-list th,
+.solve-list td {
+  border: 1px solid var(--border);
+}
+
+.solve-list td {
+  padding: 4px 6px;
+  text-align: right;
+}
+
+.solve-list td:first-child,
+.solve-list th:first-child {
+  text-align: left;
+}
+
+.solve-list td.best {
+  color: var(--series-2);
+  font-weight: 700;
+}
+
+.delete-button {
+  padding: 2px 8px;
+  font-size: 12px;
+  white-space: nowrap;
+  color: var(--text-muted);
+}
+
+.delete-button.armed {
+  font-weight: 600;
+}
+
+.solo-empty {
+  padding: 12px 6px;
+}
+
+/* Scramble and clock */
+
+.solo-scramble {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.solo-scramble .scramble-main {
+  align-items: center;
+}
+
+.solo-scramble .scramble-text {
+  font-size: clamp(20px, 2.6vw, 34px);
+  text-align: center;
+}
+
+.solo-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.solo-timer {
+  flex: 1;
+  margin: 0;
+}
+
+.solo-timer .time {
+  font-size: clamp(72px, 14vw, 180px);
+}
+
+.solo-averages {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  padding: 0 24px 40px;
+  font-size: clamp(20px, 3vw, 32px);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-secondary);
+}
+
+.settings-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.settings-tab textarea {
+  width: 100%;
+  font: 12px ui-monospace, "SF Mono", Menlo, monospace;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px;
+  resize: vertical;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Study pages (F2L, OLL, PLL) */
+
+:root {
+  --case-gray: #c9c8c2;
+  --case-edge: #1a1a19;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --case-gray: #4a4a46;
+    --case-edge: #0b0b0b;
+  }
+}
+
+:root[data-theme="dark"] {
+  --case-gray: #4a4a46;
+  --case-edge: #0b0b0b;
+}
+
+.learn {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 20px 24px;
+}
+
+.learn-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.learn-header h2 {
+  font-size: 20px;
+  margin: 0 0 4px;
+}
+
+.learn-header p {
+  margin: 0 0 6px;
+  max-width: 70ch;
+}
+
+.learn-filter {
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.case-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(124px, 1fr));
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.case-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 12px 8px;
+  background: var(--panel);
+}
+
+.case-name {
+  font-weight: 600;
+}
+
+.status-pill {
+  font-size: 11px;
+  border-radius: 999px;
+  padding: 1px 8px;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}
+
+.status-aprendendo {
+  color: var(--series-2);
+  border-color: var(--series-2);
+}
+
+.status-sei {
+  color: var(--ready);
+  border-color: var(--ready);
+}
+
+.study-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  align-items: center;
+}
+
+.study-layout figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.study-layout figcaption {
+  font-size: 12px;
+  text-align: center;
+}
+
+.study-case {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.alg-moves {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 10px;
+  margin: 0;
+  font: 600 20px ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+.case-scramble {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  color: var(--text);
+}
+
+/* Narrow windows: the solves stay on the left, only spacing and sizes shrink. */
+@media (max-width: 760px) {
+  .solo-side {
+    padding: 10px;
+  }
+
+  .session-picker > .row {
+    flex-wrap: wrap;
+  }
+
+  .session-picker > .row > button {
+    flex: 1 1 100%;
+  }
+
+  .solo-scramble {
+    padding: 16px;
+  }
+
+  .preview-net .net-face {
+    grid-template-columns: repeat(3, 18px);
+  }
+
+  .preview-net .net-sticker {
+    width: 18px;
+    height: 18px;
+  }
+}
