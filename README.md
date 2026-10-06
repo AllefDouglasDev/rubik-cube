@@ -39,6 +39,10 @@ npm run dev     # http://localhost:5173 (trainer) and http://localhost:5173/solo
 | `npm run e2e` | End-to-end test of the trainer with a synthetic camera |
 | `npm run build` | Strict type-check and production build (both pages) to `app/dist` |
 
+## Feature flags
+
+Camera scanning and move tracking are experimental and only appear locally. `__CAMERA_FEATURES__` (see `app/src/features.ts`) is on in `npm run dev` and off in production builds, where those pages are left out of the bundle. Set `VITE_CAMERA_FEATURES=true` or `false` to override it.
+
 ## Repository layout
 
 | Path | Contents |

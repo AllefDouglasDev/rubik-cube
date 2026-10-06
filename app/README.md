@@ -4,13 +4,15 @@ Treino de cubo 3x3 no navegador (Chrome). Os dados ficam só neste navegador (In
 
 ```bash
 npm install
-npm run setup   # baixa o modelo de mãos do MediaPipe e copia o runtime para public/ (só para o rastreamento)
+npm run setup   # baixa o modelo de mãos do MediaPipe e copia o runtime para public/ (só para câmera e rastreamento)
 npm run dev     # http://localhost:5173 (trainer) e http://localhost:5173/solo.html (treino solo)
 ```
 
 ## Treino solo (`/solo.html`)
 
 Tela só para registrar solves, sem câmera e sem inspeção. Segure espaço até ficar verde, solte para iniciar e aperte espaço para parar (outras teclas não param; **Esc** descarta o tempo recém-salvo). A cada solve aparece um scramble novo (random-state do cubing.js) e o botão ao lado mostra como as faces devem ficar. À esquerda ficam os tempos da sessão, com exclusão em dois cliques. As sessões são numeradas e só mudam com "Nova sessão"; a data mostrada é a de criação. A posição inicial para aplicar o scramble é **branco embaixo e verde na frente** (amarelo em cima, laranja à direita), definida em `src/cube-state/orientation.ts` e usada pela prévia das faces, pelo cubo virtual do solo e pelo cubo virtual da aba Timer. O escaneamento pela câmera mantém o protocolo próprio (branco em cima). O menu do solo tem também **F2L** (41 casos), **OLL** (57) e **PLL** (21), com os algoritmos do currículo: cada caso aparece como desenho (vista de cima para OLL/PLL e o par destacado para F2L), abre no cubo virtual para ver o algoritmo giro a giro, mostra um scramble para montar o caso no cubo real e guarda o status (novo, aprendendo, sei). "Praticar" sorteia casos (mais os que você está aprendendo), esconde o algoritmo até você pedir e atualiza o status pela sua resposta. Os dados ficam no IndexedDB `cubo-solo`, separado do trainer, e a engrenagem exporta/importa tudo em JSON, incluindo o progresso dos casos.
+
+As abas **Câmera** e **Rastreamento** ficam atrás da feature flag `__CAMERA_FEATURES__` (`src/features.ts`): aparecem no `npm run dev` e ficam fora do build de produção. `VITE_CAMERA_FEATURES=true` ou `false` força um dos dois.
 
 ## Abas
 

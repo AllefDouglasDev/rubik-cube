@@ -1,7 +1,7 @@
 import { createReadStream, existsSync } from "node:fs";
 import { extname, resolve } from "node:path";
 import react from "@vitejs/plugin-react";
-import { type Plugin } from "vite";
+import { type Plugin, loadEnv } from "vite";
 import { defineConfig } from "vitest/config";
 
 // MediaPipe imports its WASM loader at runtime (`import("/vendor/…js")`). In dev, Vite rewrites those
@@ -23,32 +23,38 @@ function serveVendorRaw(): Plugin {
   };
 }
 
-export default defineConfig({
-  plugins: [react(), serveVendorRaw()],
-  worker: { format: "es" },
-  // cubing.js spawns its own workers (scramble/search); pre-bundling breaks their URLs.
-  optimizeDeps: { exclude: ["cubing", "@mediapipe/tasks-vision"] },
-  // The curriculum content is read from ../docs/curriculum.
-  server: { fs: { allow: [".."] } },
-  build: {
-    target: "esnext",
-    // Two pages: the trainer (index.html) and the solo timer (solo.html).
-    rollupOptions: {
-      input: { main: "index.html", solo: "solo.html" },
-      // cubing.js loads its search worker entry through dynamic imports. Vite's preload helper touches
-      // `document` and crashes inside the worker (no scrambles in production) whenever an import has
-      // preload deps: JS deps are off (modulePreload below), and keeping dependencies out of the app chunks
-      // keeps CSS deps away from cubing's imports.
-      output: {
-        manualChunks(id: string) {
-          const cubing = /node_modules\/cubing\/dist\/lib\/cubing\/(.+)\.js$/.exec(id)?.[1];
-          if (cubing) return `cubing-${cubing.replace(/\//g, "-")}`;
-          const pkg = /node_modules\/((?:@[^/]+\/)?[^/]+)\//.exec(id)?.[1];
-          return pkg ? `vendor-${pkg.replace("/", "-")}` : undefined;
+export default defineConfig(({ command, mode }) => {
+  // Camera features (src/features.ts): on in the dev server, off in builds, unless VITE_CAMERA_FEATURES is set.
+  const cameraEnv = loadEnv(mode, import.meta.dirname, "VITE_").VITE_CAMERA_FEATURES;
+  const cameraFeatures = cameraEnv ? cameraEnv === "true" : command === "serve";
+  return {
+    define: { __CAMERA_FEATURES__: JSON.stringify(cameraFeatures) },
+    plugins: [react(), serveVendorRaw()],
+    worker: { format: "es" },
+    // cubing.js spawns its own workers (scramble/search); pre-bundling breaks their URLs.
+    optimizeDeps: { exclude: ["cubing", "@mediapipe/tasks-vision"] },
+    // The curriculum content is read from ../docs/curriculum.
+    server: { fs: { allow: [".."] } },
+    build: {
+      target: "esnext",
+      // Two pages: the trainer (index.html) and the solo timer (solo.html).
+      rollupOptions: {
+        input: { main: "index.html", solo: "solo.html" },
+        // cubing.js loads its search worker entry through dynamic imports. Vite's preload helper touches
+        // `document` and crashes inside the worker (no scrambles in production) whenever an import has
+        // preload deps: JS deps are off (modulePreload below), and keeping dependencies out of the app chunks
+        // keeps CSS deps away from cubing's imports.
+        output: {
+          manualChunks(id: string) {
+            const cubing = /node_modules\/cubing\/dist\/lib\/cubing\/(.+)\.js$/.exec(id)?.[1];
+            if (cubing) return `cubing-${cubing.replace(/\//g, "-")}`;
+            const pkg = /node_modules\/((?:@[^/]+\/)?[^/]+)\//.exec(id)?.[1];
+            return pkg ? `vendor-${pkg.replace("/", "-")}` : undefined;
+          },
         },
       },
+      modulePreload: false,
     },
-    modulePreload: false,
-  },
-  test: { environment: "node" },
+    test: { environment: "node" },
+  };
 });

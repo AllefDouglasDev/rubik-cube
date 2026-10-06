@@ -1,17 +1,33 @@
 import { useLiveQuery } from "dexie-react-hooks";
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, lazy, useEffect, useMemo, useState } from "react";
+import "./features";
 import { useSettings } from "./settings";
 import { db } from "./storage/db";
 import { Repo } from "./storage/repo";
 import { CurriculumPage } from "./ui/CurriculumPage";
 import { HistoryPage } from "./ui/HistoryPage";
-import { ScanPage } from "./ui/ScanPage";
 import { SessionBar } from "./ui/SessionBar";
 import { TimerPage } from "./ui/TimerPage";
-import { TrackingPage } from "./ui/TrackingPage";
 import { TrainerPage } from "./ui/TrainerPage";
 
 type Tab = "timer" | "history" | "curriculum" | "trainer" | "scan" | "tracking";
+
+// Camera pages only exist behind the flag; when it is off the dynamic imports are dropped from the build.
+const ScanPage = __CAMERA_FEATURES__ ? lazy(() => import("./ui/ScanPage").then((m) => ({ default: m.ScanPage }))) : null;
+const TrackingPage = __CAMERA_FEATURES__ ? lazy(() => import("./ui/TrackingPage").then((m) => ({ default: m.TrackingPage }))) : null;
+
+const TABS: [Tab, string][] = [
+  ["timer", "Timer"],
+  ["history", "Histórico"],
+  ["curriculum", "Currículo"],
+  ["trainer", "Treino"],
+  ...(__CAMERA_FEATURES__
+    ? ([
+        ["scan", "Câmera"],
+        ["tracking", "Rastreamento"],
+      ] as [Tab, string][])
+    : []),
+];
 
 export function App() {
   const repo = useMemo(() => new Repo(db), []);
@@ -39,16 +55,7 @@ export function App() {
       <header className="app-header">
         <h1>Cubo 3x3 Trainer</h1>
         <nav className="tabs" role="tablist">
-          {(
-            [
-              ["timer", "Timer"],
-              ["history", "Histórico"],
-              ["curriculum", "Currículo"],
-              ["trainer", "Treino"],
-              ["scan", "Câmera"],
-              ["tracking", "Rastreamento"],
-            ] as const
-          ).map(([id, label]) => (
+          {TABS.map(([id, label]) => (
             <button key={id} type="button" role="tab" aria-selected={tab === id} className={tab === id ? "selected" : ""} onClick={() => setTab(id)}>
               {label}
             </button>
@@ -75,19 +82,21 @@ export function App() {
         {tab === "history" && <HistoryPage repo={repo} solves={solves} />}
         {tab === "curriculum" && <CurriculumPage repo={repo} />}
         {tab === "trainer" && <TrainerPage repo={repo} active holdMs={settings.holdMs} />}
-        {tab === "tracking" && (
-          <TrackingPage repo={repo} active sessionId={sessionId} timerScramble={timerScramble} holdMs={settings.holdMs} />
-        )}
-        {tab === "scan" && (
-          <ScanPage
-            active
-            timerScramble={timerScramble}
-            onUseState={(alg) => {
-              setScrambleOverride({ alg, nonce: Date.now() });
-              setTab("timer");
-            }}
-          />
-        )}
+        <Suspense fallback={<div className="loading">Carregando…</div>}>
+          {tab === "tracking" && TrackingPage && (
+            <TrackingPage repo={repo} active sessionId={sessionId} timerScramble={timerScramble} holdMs={settings.holdMs} />
+          )}
+          {tab === "scan" && ScanPage && (
+            <ScanPage
+              active
+              timerScramble={timerScramble}
+              onUseState={(alg) => {
+                setScrambleOverride({ alg, nonce: Date.now() });
+                setTab("timer");
+              }}
+            />
+          )}
+        </Suspense>
       </main>
     </div>
   );
