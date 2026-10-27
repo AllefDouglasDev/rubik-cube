@@ -125,11 +125,7 @@ export function TrainerPage({ repo, active, holdMs }: Props) {
             </section>
             <div
               className={`timer-display phase-${pendingMs !== null ? "stopped" : phase}`}
-              onPointerDown={(e) => {
-                e.preventDefault();
-                if (pendingMs === null) timer.press("spaceDown");
-              }}
-              onPointerUp={() => pendingMs === null && timer.press("spaceUp")}
+              {...(pendingMs === null ? timer.pointerHandlers : { onContextMenu: timer.pointerHandlers.onContextMenu })}
             >
               <div className="time">{display}</div>
               <div className="hint">

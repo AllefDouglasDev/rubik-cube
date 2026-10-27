@@ -214,6 +214,47 @@ try {
   await fresh.waitForSelector(".app-header");
   check(true, "treino solo volta para o trainer");
 
+  // Phone in portrait: long press on the clock arms the timer without selecting text, the layout fits the
+  // width, and "Descartar" replaces Esc.
+  const phone = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true, deviceScaleFactor: 2 });
+  const mobile = await phone.newPage();
+  mobile.on("pageerror", (e) => errors.push(e.message));
+  mobile.on("console", (m) => m.type() === "error" && errors.push(m.text()));
+  await mobile.goto("http://localhost:5298/solo.html");
+  await mobile.waitForFunction(() => /^[UDRLFB]/.test(document.querySelector(".solo-scramble .scramble-text")?.textContent ?? ""), null, {
+    timeout: 60_000,
+  });
+  const cdp = await phone.newCDPSession(mobile);
+  const box = await (await mobile.$(".solo-timer")).boundingBox();
+  const point = [{ x: box.x + box.width / 2, y: box.y + box.height / 2 }];
+  const touch = (type) => cdp.send("Input.dispatchTouchEvent", { type, touchPoints: type === "touchEnd" ? [] : point });
+  const mobilePhase = () => mobile.$eval(".solo-timer", (el) => [...el.classList].find((c) => c.startsWith("phase-")));
+  const mobileRows = () => mobile.$$eval(".solve-list tbody tr", (trs) => trs.length);
+  check(
+    await mobile.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
+    "celular: sem rolagem horizontal",
+  );
+  check((await mobile.textContent(".solo-timer .hint")).includes("Toque e segure"), "celular: dica fala de toque");
+  await shot(mobile, "10-celular");
+  await touch("touchStart");
+  await mobile.waitForTimeout(100);
+  check((await mobilePhase()) === "phase-armed", "celular: segurar arma o timer");
+  await mobile.waitForTimeout(400);
+  check((await mobilePhase()) === "phase-ready", "celular: depois de segurar fica pronto");
+  check((await mobile.evaluate(() => getSelection()?.toString() ?? "")) === "", "celular: segurar não seleciona texto");
+  await touch("touchEnd");
+  check((await mobilePhase()) === "phase-running", "celular: soltar inicia");
+  await mobile.waitForTimeout(300);
+  await touch("touchStart");
+  await touch("touchEnd");
+  await mobile.waitForSelector(".solve-list tbody tr");
+  check((await mobilePhase()) === "phase-stopped" && (await mobileRows()) === 1, "celular: tocar para e salva o tempo");
+  await shot(mobile, "11-celular-parado");
+  await mobile.tap(".solo-discard button");
+  await mobile.waitForSelector(".solo-empty");
+  check((await mobileRows()) === 0, "celular: Descartar apaga o tempo");
+  await phone.close();
+
   check(errors.length === 0, `sem erros no console${errors.length ? `: ${errors.join(" | ")}` : ""}`);
 } finally {
   await browser.close();

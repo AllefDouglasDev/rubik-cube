@@ -1,5 +1,5 @@
 // Binds the timer state machine to the keyboard (and pointer), drives the display clock and inspection beeps.
-import { useCallback, useEffect, useReducer, useRef, useState } from "react";
+import { type PointerEvent, useCallback, useEffect, useMemo, useReducer, useRef, useState } from "react";
 import { type SolveResult, type TimerConfig, type TimerEvent, type TimerState, initialTimerState, timerReducer } from "./timerMachine";
 
 interface Options {
@@ -59,6 +59,24 @@ export function useTimer({ config, enabled, onComplete, onDiscard, stopOnAnyKey 
   const press = useCallback((type: "spaceDown" | "spaceUp") => dispatch({ type, t: performance.now() }), []);
   const cancel = useCallback(() => dispatch({ type: "cancel" }), []);
 
+  // Touch and mouse on the clock area: press = space down, release = space up. A cancelled touch (the
+  // browser took it over) counts as an early release, so the timer never stays stuck armed. The context
+  // menu and text selection of a long press are suppressed (also in CSS, see .timer-display).
+  const pointerHandlers = useMemo(
+    () => ({
+      onPointerDown: (e: PointerEvent<HTMLElement>) => {
+        if (!e.isPrimary || e.button !== 0) return;
+        e.preventDefault();
+        e.currentTarget.setPointerCapture?.(e.pointerId);
+        press("spaceDown");
+      },
+      onPointerUp: (e: PointerEvent<HTMLElement>) => e.isPrimary && press("spaceUp"),
+      onPointerCancel: (e: PointerEvent<HTMLElement>) => e.isPrimary && press("spaceUp"),
+      onContextMenu: (e: { preventDefault: () => void }) => e.preventDefault(),
+    }),
+    [press],
+  );
+
   useEffect(() => {
     if (!enabled) return;
     const down = (e: KeyboardEvent) => {
@@ -116,6 +134,7 @@ export function useTimer({ config, enabled, onComplete, onDiscard, stopOnAnyKey 
     state,
     press,
     cancel,
+    pointerHandlers,
     elapsedMs: state.phase === "running" ? now - state.startedAt : state.phase === "stopped" ? state.result.timeMs : 0,
     inspectionElapsedMs: inspectionStart !== undefined ? Math.max(0, now - inspectionStart) : undefined,
   };

@@ -152,11 +152,7 @@ export function TimerPage({ repo, sessionId, solves, settings, onSettings, activ
 
         <div
           className={`timer-display phase-${state.phase}`}
-          onPointerDown={(e) => {
-            e.preventDefault();
-            timer.press("spaceDown");
-          }}
-          onPointerUp={() => timer.press("spaceUp")}
+          {...timer.pointerHandlers}
           role="timer"
           aria-live="off"
         >

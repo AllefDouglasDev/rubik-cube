@@ -4,6 +4,8 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
+  height: 100dvh;
+  padding: 0 env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 .solo-nav {
@@ -12,6 +14,7 @@
   justify-content: space-between;
   gap: 12px;
   padding: 8px 16px;
+  padding-top: max(8px, env(safe-area-inset-top));
   border-bottom: 1px solid var(--border);
   background: var(--panel);
 }
@@ -67,7 +70,8 @@
 .solo-shell.focus .solo-nav,
 .solo-shell.focus .solo-side,
 .solo-shell.focus .solo-scramble,
-.solo-shell.focus .solo-averages {
+.solo-shell.focus .solo-averages,
+.solo-shell.focus .solo-discard {
   opacity: 0;
   visibility: hidden;
 }
@@ -281,6 +285,13 @@
   font-size: clamp(72px, 14vw, 180px);
 }
 
+.solo-discard {
+  display: flex;
+  justify-content: center;
+  min-height: 40px;
+  margin-bottom: 12px;
+}
+
 .solo-averages {
   display: flex;
   justify-content: center;
@@ -449,22 +460,89 @@
   color: var(--text);
 }
 
-/* Narrow windows: the solves stay on the left, only spacing and sizes shrink. */
+/* Phones and narrow windows: one column that scrolls. The scramble, clock and averages fill the first
+   screen (the clock is the big touch area); the session, summary and solves come below it. */
 @media (max-width: 760px) {
+  .solo-nav {
+    padding: 6px 10px;
+    padding-top: max(6px, env(safe-area-inset-top));
+    gap: 8px;
+  }
+
+  .nav-tab {
+    padding: 8px 10px;
+  }
+
+  .solo {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .solo-main {
+    flex: none;
+    min-height: 100%;
+    overflow: visible;
+  }
+
   .solo-side {
-    padding: 10px;
+    order: 1;
+    flex: none;
+    padding: 16px 12px 24px;
+    border-right: none;
+    border-top: 1px solid var(--border);
   }
 
-  .session-picker > .row {
-    flex-wrap: wrap;
-  }
-
-  .session-picker > .row > button {
-    flex: 1 1 100%;
+  .solo-solves {
+    flex: none;
+    overflow: visible;
   }
 
   .solo-scramble {
-    padding: 16px;
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .solo-scramble .scramble-text {
+    font-size: 19px;
+    word-spacing: 2px;
+  }
+
+  .solo-timer {
+    min-height: 220px;
+  }
+
+  .solo-averages {
+    gap: 24px;
+    padding: 0 12px 20px;
+    font-size: 20px;
+  }
+
+  .solo-shell.focus .solo-timer .time {
+    font-size: min(24vw, 40vh);
+  }
+
+  .icon-button {
+    min-width: 40px;
+    height: 40px;
+  }
+
+  .solve-list {
+    font-size: 14px;
+  }
+
+  .solve-list td,
+  .solve-list th {
+    padding: 6px 4px;
+  }
+
+  .delete-button {
+    padding: 6px 8px;
+  }
+
+  .learn {
+    padding: 16px 12px;
   }
 
   .preview-net .net-face {

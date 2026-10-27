@@ -48,10 +48,32 @@ const HINT: Record<string, string> = {
   cancelled: "Cancelado, nada foi salvo",
 };
 
+// Touch screens have no space or Esc: the clock area is the button and a "Descartar" button replaces Esc.
+const TOUCH_HINT: Record<string, string> = {
+  ...HINT,
+  idle: "Toque e segure para preparar",
+  running: "Toque para parar",
+  stopped: "Tempo salvo",
+};
+
+const COARSE_POINTER = "(pointer: coarse)";
+
+function useCoarsePointer(): boolean {
+  const [coarse, setCoarse] = useState(() => matchMedia(COARSE_POINTER).matches);
+  useEffect(() => {
+    const query = matchMedia(COARSE_POINTER);
+    const update = () => setCoarse(query.matches);
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
+  return coarse;
+}
+
 export function SoloApp() {
   const repo = useMemo(() => new SoloRepo(new SoloDb()), []);
   const [sessionId, setSessionId] = useState(loadCurrentSessionId);
   const view = useView();
+  const touch = useCoarsePointer();
   const [dialog, setDialog] = useState<"preview" | "settings" | null>(null);
   const sessions = useLiveQuery(() => repo.listSessions(), [repo]);
 
@@ -185,16 +207,20 @@ export function SoloApp() {
 
             <div
               className={`timer-display solo-timer phase-${state.phase}`}
-              onPointerDown={(e) => {
-                e.preventDefault();
-                timer.press("spaceDown");
-              }}
-              onPointerUp={() => timer.press("spaceUp")}
+              {...timer.pointerHandlers}
               role="timer"
               aria-live="off"
             >
               <div className="time">{display}</div>
-              <div className="hint">{HINT[state.phase]}</div>
+              <div className="hint">{(touch ? TOUCH_HINT : HINT)[state.phase]}</div>
+            </div>
+
+            <div className="solo-discard">
+              {state.phase === "stopped" && (
+                <button type="button" onClick={timer.cancel}>
+                  Descartar este tempo
+                </button>
+              )}
             </div>
 
             <div className="solo-averages">
