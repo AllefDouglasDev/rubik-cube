@@ -263,6 +263,26 @@ try {
   await mobile.tap(".solo-discard button");
   await mobile.waitForSelector(".solo-empty");
   check((await mobileRows()) === 0, "celular: Descartar apaga o tempo");
+
+  // The running clock can be switched off; the choice survives a reload.
+  check(await mobile.isChecked(".solo-switch input"), "contador ligado por padrão");
+  await mobile.tap(".solo-switch input");
+  await mobile.reload();
+  await mobile.waitForSelector(".solo-switch input");
+  check(!(await mobile.isChecked(".solo-switch input")), "contador desligado continua salvo depois de recarregar");
+  await mobile.waitForFunction(() => /^[UDRLFB]/.test(document.querySelector(".solo-scramble .scramble-text")?.textContent ?? ""), null, {
+    timeout: 60_000,
+  });
+  await touch("touchStart");
+  await mobile.waitForTimeout(600);
+  await touch("touchEnd");
+  await mobile.waitForTimeout(200);
+  check((await mobile.textContent(".solo-timer .time")) === "Executando…", "contador desligado mostra Executando… em vez do tempo");
+  await shot(mobile, "12-celular-sem-contador");
+  await touch("touchStart");
+  await touch("touchEnd");
+  await mobile.waitForSelector(".solo-timer.phase-stopped");
+  check(/^\d+\.\d\d$/.test(await mobile.textContent(".solo-timer .time")), "ao parar, o tempo aparece normalmente");
   await phone.close();
 
   check(errors.length === 0, `sem erros no console${errors.length ? `: ${errors.join(" | ")}` : ""}`);

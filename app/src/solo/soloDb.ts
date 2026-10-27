@@ -171,3 +171,22 @@ export function saveCurrentSessionId(id: string): void {
     // The latest session is selected on the next load instead.
   }
 }
+
+// Whether the clock counts up while a solve runs (on by default); off shows only "Executando…".
+const SHOW_RUNNING_TIME_KEY = "cubo-solo.showRunningTime";
+
+export function loadShowRunningTime(): boolean {
+  try {
+    return localStorage.getItem(SHOW_RUNNING_TIME_KEY) !== "false";
+  } catch {
+    return true;
+  }
+}
+
+export function saveShowRunningTime(show: boolean): void {
+  try {
+    localStorage.setItem(SHOW_RUNNING_TIME_KEY, String(show));
+  } catch {
+    // The clock is shown again on the next load instead.
+  }
+}

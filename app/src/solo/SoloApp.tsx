@@ -12,7 +12,15 @@ import type { CaseSet } from "./learn/cases";
 import { SessionPicker } from "./SessionPicker";
 import { SettingsDialog } from "./SettingsDialog";
 import { SessionSummary, SolveList } from "./SolveList";
-import { SoloDb, SoloRepo, type SoloSolve, loadCurrentSessionId, saveCurrentSessionId } from "./soloDb";
+import {
+  SoloDb,
+  SoloRepo,
+  type SoloSolve,
+  loadCurrentSessionId,
+  loadShowRunningTime,
+  saveCurrentSessionId,
+  saveShowRunningTime,
+} from "./soloDb";
 
 const HOLD_MS = 300;
 
@@ -74,6 +82,7 @@ export function SoloApp() {
   const [sessionId, setSessionId] = useState(loadCurrentSessionId);
   const view = useView();
   const touch = useCoarsePointer();
+  const [showRunningTime, setShowRunningTime] = useState(loadShowRunningTime);
   const [dialog, setDialog] = useState<"preview" | "settings" | null>(null);
   const sessions = useLiveQuery(() => repo.listSessions(), [repo]);
 
@@ -139,8 +148,14 @@ export function SoloApp() {
   // must stay in place so a swipe that started on the clock can still scroll it.
   const focus = (state.phase === "armed" && !touch) || state.phase === "ready" || state.phase === "running";
   const lastSolve = solves.find((s) => s.id === lastSolveId) ?? solves.at(-1);
-  const display =
-    state.phase === "running" ? formatTime(timer.elapsedMs) : focus || !lastSolve ? formatTime(0) : formatTime(lastSolve.timeMs);
+  const hideClock = state.phase === "running" && !showRunningTime;
+  const display = hideClock
+    ? "Executando…"
+    : state.phase === "running"
+      ? formatTime(timer.elapsedMs)
+      : focus || !lastSolve
+        ? formatTime(0)
+        : formatTime(lastSolve.timeMs);
 
   const createSession = async () => {
     select((await repo.createSession()).id);
@@ -213,7 +228,7 @@ export function SoloApp() {
               role="timer"
               aria-live="off"
             >
-              <div className="time">{display}</div>
+              <div className={`time ${hideClock ? "time-hidden" : ""}`}>{display}</div>
               <div className="hint">{(touch ? TOUCH_HINT : HINT)[state.phase]}</div>
             </div>
 
@@ -229,6 +244,19 @@ export function SoloApp() {
               <div>ao5: {formatTime(stats.ao5)}</div>
               <div>ao12: {formatTime(stats.ao12)}</div>
             </div>
+
+            <label className="solo-switch">
+              <input
+                type="checkbox"
+                role="switch"
+                checked={showRunningTime}
+                onChange={(e) => {
+                  setShowRunningTime(e.target.checked);
+                  saveShowRunningTime(e.target.checked);
+                }}
+              />
+              Mostrar o tempo durante a solução
+            </label>
           </main>
         </div>
       ) : (
