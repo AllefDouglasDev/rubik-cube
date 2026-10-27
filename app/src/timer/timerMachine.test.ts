@@ -94,6 +94,31 @@ describe("timerReducer with inspection", () => {
   });
 });
 
+describe("abort", () => {
+  it("drops a ready hold without starting", () => {
+    const s = run(
+      [
+        { type: "spaceDown", t: 0 },
+        { type: "tick", t: 350 },
+        { type: "abort" },
+        { type: "spaceUp", t: 400 },
+      ],
+      NO_INSPECTION,
+    );
+    expect(s).toEqual({ phase: "idle" });
+  });
+
+  it("returns to inspection when aborted during the hold", () => {
+    const s = run([{ type: "spaceDown", t: 0 }, { type: "spaceDown", t: 1_000 }, { type: "abort" }], WITH_INSPECTION);
+    expect(s).toEqual({ phase: "inspecting", inspectionStart: 0 });
+  });
+
+  it("does not stop a running solve", () => {
+    const running = run([{ type: "spaceDown", t: 0 }, { type: "tick", t: 350 }, { type: "spaceUp", t: 400 }], NO_INSPECTION);
+    expect(timerReducer(running, { type: "abort" }, NO_INSPECTION)).toBe(running);
+  });
+});
+
 describe("cancel", () => {
   it("cancels a running solve without a result", () => {
     const running: TimerState = { phase: "running", startedAt: 0, penalty: "none" };

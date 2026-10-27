@@ -236,11 +236,21 @@ try {
   );
   check((await mobile.textContent(".solo-timer .hint")).includes("Toque e segure"), "celular: dica fala de toque");
   await shot(mobile, "10-celular");
+  // A swipe that starts on the clock scrolls the page and never arms the timer.
+  await cdp.send("Input.synthesizeScrollGesture", { x: point[0].x, y: point[0].y, yDistance: -300, speed: 1200, gestureSourceType: "touch" });
+  await mobile.waitForTimeout(200);
+  check((await mobile.$eval(".solo", (el) => el.scrollTop)) > 0, "celular: arrastar sobre o tempo rola a página");
+  check((await mobilePhase()) === "phase-idle" && (await mobileRows()) === 0, "celular: arrastar não aciona o timer");
+  await mobile.$eval(".solo", (el) => el.scrollTo(0, 0));
+  await mobile.waitForTimeout(100);
+
   await touch("touchStart");
   await mobile.waitForTimeout(100);
   check((await mobilePhase()) === "phase-armed", "celular: segurar arma o timer");
-  await mobile.waitForTimeout(400);
-  check((await mobilePhase()) === "phase-ready", "celular: depois de segurar fica pronto");
+  await mobile.waitForTimeout(250);
+  check((await mobilePhase()) === "phase-armed", "celular: com 0,35 s ainda não está pronto");
+  await mobile.waitForTimeout(300);
+  check((await mobilePhase()) === "phase-ready", "celular: depois de 0,5 s parado fica pronto");
   check((await mobile.evaluate(() => getSelection()?.toString() ?? "")) === "", "celular: segurar não seleciona texto");
   await touch("touchEnd");
   check((await mobilePhase()) === "phase-running", "celular: soltar inicia");

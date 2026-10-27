@@ -14,6 +14,10 @@ interface Options {
 }
 
 const INSPECTION_BEEPS_MS = [8_000, 12_000];
+// A touch must stay still this long before the timer is ready, so a scroll that starts on the clock never
+// starts it; moving more than TOUCH_SLOP_PX drops the hold.
+const TOUCH_HOLD_MS = 500;
+const TOUCH_SLOP_PX = 10;
 
 // Fields where the keyboard is for typing. Focused buttons and checkboxes still belong to the timer
 // (space is preventDefault-ed on both keydown and keyup, so it never clicks them).
@@ -42,7 +46,12 @@ function beep(): void {
 export function useTimer({ config, enabled, onComplete, onDiscard, stopOnAnyKey = true }: Options) {
   const configRef = useRef(config);
   configRef.current = config;
-  const [state, dispatch] = useReducer((s: TimerState, e: TimerEvent) => timerReducer(s, e, configRef.current), initialTimerState);
+  // Where the current touch hold started; null for keyboard and mouse holds.
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
+  const [state, dispatch] = useReducer((s: TimerState, e: TimerEvent) => {
+    const config = configRef.current;
+    return timerReducer(s, e, touchStart.current ? { ...config, holdMs: Math.max(config.holdMs, TOUCH_HOLD_MS) } : config);
+  }, initialTimerState);
   const [now, setNow] = useState(() => performance.now());
   const callbacks = useRef({ onComplete, onDiscard });
   callbacks.current = { onComplete, onDiscard };
@@ -59,19 +68,32 @@ export function useTimer({ config, enabled, onComplete, onDiscard, stopOnAnyKey 
   const press = useCallback((type: "spaceDown" | "spaceUp") => dispatch({ type, t: performance.now() }), []);
   const cancel = useCallback(() => dispatch({ type: "cancel" }), []);
 
-  // Touch and mouse on the clock area: press = space down, release = space up. A cancelled touch (the
-  // browser took it over) counts as an early release, so the timer never stays stuck armed. The context
-  // menu and text selection of a long press are suppressed (also in CSS, see .timer-display).
+  // Touch and mouse on the clock area: press = space down, release = space up. A touch that moves, or that
+  // the browser takes over to scroll (pointercancel; the clock allows vertical panning), drops the hold
+  // without starting. The context menu and text selection of a long press are suppressed (also in CSS, see
+  // .timer-display).
   const pointerHandlers = useMemo(
     () => ({
       onPointerDown: (e: PointerEvent<HTMLElement>) => {
         if (!e.isPrimary || e.button !== 0) return;
         e.preventDefault();
-        e.currentTarget.setPointerCapture?.(e.pointerId);
+        touchStart.current = e.pointerType === "touch" ? { x: e.clientX, y: e.clientY } : null;
+        // Mouse releases outside the clock still count (touches are captured by the browser already).
+        if (!touchStart.current) e.currentTarget.setPointerCapture?.(e.pointerId);
         press("spaceDown");
       },
+      onPointerMove: (e: PointerEvent<HTMLElement>) => {
+        const start = touchStart.current;
+        if (!e.isPrimary || !start || Math.hypot(e.clientX - start.x, e.clientY - start.y) <= TOUCH_SLOP_PX) return;
+        touchStart.current = null;
+        dispatch({ type: "abort" });
+      },
       onPointerUp: (e: PointerEvent<HTMLElement>) => e.isPrimary && press("spaceUp"),
-      onPointerCancel: (e: PointerEvent<HTMLElement>) => e.isPrimary && press("spaceUp"),
+      onPointerCancel: (e: PointerEvent<HTMLElement>) => {
+        if (!e.isPrimary) return;
+        touchStart.current = null;
+        dispatch({ type: "abort" });
+      },
       onContextMenu: (e: { preventDefault: () => void }) => e.preventDefault(),
     }),
     [press],
@@ -83,6 +105,7 @@ export function useTimer({ config, enabled, onComplete, onDiscard, stopOnAnyKey 
       if (isTypingTarget(e.target) || e.repeat) return;
       if (e.code === "Space") {
         e.preventDefault();
+        touchStart.current = null;
         dispatch({ type: "spaceDown", t: performance.now() });
       } else if (e.code === "Escape") {
         dispatch({ type: "cancel" });

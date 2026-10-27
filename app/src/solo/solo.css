@@ -85,6 +85,9 @@
   position: fixed;
   inset: 0;
   z-index: 5;
+  margin: 0;
+  border-color: transparent;
+  border-radius: 0;
   background: var(--surface);
 }
 
@@ -511,6 +514,7 @@
 
   .solo-timer {
     min-height: 220px;
+    margin: 12px;
   }
 
   .solo-averages {

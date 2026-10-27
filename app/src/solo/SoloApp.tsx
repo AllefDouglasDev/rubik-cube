@@ -135,7 +135,9 @@ export function SoloApp() {
   if (!sessions || !current) return <div className="loading">Carregando…</div>;
 
   const { state } = timer;
-  const focus = state.phase === "armed" || state.phase === "ready" || state.phase === "running";
+  // On touch screens the clock only takes the whole screen once the hold is ready: while armed the page
+  // must stay in place so a swipe that started on the clock can still scroll it.
+  const focus = (state.phase === "armed" && !touch) || state.phase === "ready" || state.phase === "running";
   const lastSolve = solves.find((s) => s.id === lastSolveId) ?? solves.at(-1);
   const display =
     state.phase === "running" ? formatTime(timer.elapsedMs) : focus || !lastSolve ? formatTime(0) : formatTime(lastSolve.timeMs);

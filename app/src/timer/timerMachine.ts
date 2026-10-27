@@ -2,6 +2,7 @@
 //
 // idle ─space↓─▶ inspecting (if enabled) ─space↓─▶ armed ─held ≥ holdMs─▶ ready ─space↑─▶ running ─any key↓─▶ stopped
 // Esc cancels from any phase; in `stopped` the caller discards the solve that was just saved.
+// `abort` drops a hold (armed or ready) without starting, e.g. when a touch on the clock turns into a scroll.
 import type { Penalty } from "../stats/stats";
 
 export const INSPECTION_MS = 15_000;
@@ -32,6 +33,7 @@ export type TimerEvent =
   | { type: "spaceUp"; t: number }
   | { type: "keyDown"; t: number }
   | { type: "tick"; t: number }
+  | { type: "abort" }
   | { type: "cancel" };
 
 export const initialTimerState: TimerState = { phase: "idle" };
@@ -58,7 +60,7 @@ export function timerReducer(state: TimerState, event: TimerEvent, config: Timer
       return { phase: "armed", holdStart: event.t, inspectionStart: state.inspectionStart };
 
     case "armed":
-      if (event.type === "spaceUp") {
+      if (event.type === "spaceUp" || event.type === "abort") {
         // Released too early: back to where the user was.
         return state.inspectionStart === undefined ? { phase: "idle" } : { phase: "inspecting", inspectionStart: state.inspectionStart };
       }
@@ -68,6 +70,9 @@ export function timerReducer(state: TimerState, event: TimerEvent, config: Timer
       return state;
 
     case "ready": {
+      if (event.type === "abort") {
+        return state.inspectionStart === undefined ? { phase: "idle" } : { phase: "inspecting", inspectionStart: state.inspectionStart };
+      }
       if (event.type !== "spaceUp") return state;
       const inspectionMs = state.inspectionStart === undefined ? undefined : event.t - state.inspectionStart;
       return { phase: "running", startedAt: event.t, inspectionMs, penalty: inspectionPenalty(inspectionMs) };
